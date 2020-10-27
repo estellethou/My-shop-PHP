@@ -210,17 +210,17 @@ echo "</table>";
             
             <div class="form-group">
                 <label for="picture">Picture: </label>
-                <input type="file" class="form-control-file" id="picture" name="picture">
+                <input type="file" class="form-control-file " id="picture" name="picture">
             </div>
 
             <div class="form-group">
                 <label for="price">Price: </label>
-                <input type="text" class="form-control-file" id="price" name="price">
+                <input type="text" class="form-control" id="price" name="price">
             </div>
 
             <div class="form-group">
                 <label for="category_id">Category Id: </label>
-                <input type="number" class="form-control-file" id="category_id" name="category_id">
+                <input type="number" class="form-control" id="category_id" name="category_id">
             </div>
 
             <div>
