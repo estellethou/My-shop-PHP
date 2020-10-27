@@ -28,14 +28,14 @@ class Product {
         }
 
         $reponse = $bdd->prepare("INSERT INTO products(name, description, picture, price, category_id) 
-                                  VALUES (?, ?, ?, ?, ?;");
+                                  VALUES (?, ?, ?, ?, ?);");
         $reponse->bindParam(1, $this->name, PDO::PARAM_STR);
         $reponse->bindParam(2, $this->description, PDO::PARAM_STR);
         $reponse->bindParam(3, $this->picture, PDO::PARAM_STR);
-        $reponse->bindParam(4, $this->price, PDO::PARAM_INT);
-        $reponse->bindParam(5, $this->category_id, PDO::PARAM_INT);
+        $reponse->bindParam(4, intval($this->price), PDO::PARAM_INT);
+        $reponse->bindParam(5, intval($this->category_id), PDO::PARAM_INT);
         $reponse->execute();
-        #echo "Product created" . PHP_EOL;
+        #var_dump($reponse->errorInfo());
     }
 } 
 
@@ -114,11 +114,12 @@ if (isset($_POST['add_user'])){
 }
 
 if (isset($_POST['add_product'])) {
-    $_POST['name'] = new Product($_POST['name'], $_POST['description'], $_POST['picture'], $_POST['price'], $_POST['category_id']);
+    $a =new Product($_POST['name'], $_POST['description'], $_POST['picture'], $_POST['price'], $_POST['category_id']);
+    var_dump($a);
 }
 
 if (isset($_POST['add_category'])) {
-    $_POST['name_category'] = new Category($_POST['name_category'], $_POST['parent_id']);
+    new Category($_POST['name_category'], $_POST['parent_id']);
 }
 ?>
 
@@ -169,7 +170,6 @@ if (isset($_POST['add_category'])) {
         </form>
 
 <?php 
-
 $reponse = $bdd->prepare("SELECT * FROM users");
 $reponse->execute();
 
@@ -195,8 +195,68 @@ echo "<td>" . $donnees['created_at'] . "</td>";
 echo "</tr>";
 }
 echo "</table>";
+?>
 
-$reponse->closeCursor();
+<h2> Add Product </h2>   
+        <form method="post">
+            <div class="form-group">
+                    <label for="username">Name: </label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="name"> </br>
+            </div>
+
+            <div class="form-group">
+                    <label for="description">Description: </label>
+                    <input type="test" class="form-control" id="description" name="description" placeholder="description"> </br>
+            </div>
+
+            
+            <div class="form-group">
+                <label for="picture">Picture: </label>
+                <input type="file" class="form-control-file" id="picture" name="picture">
+            </div>
+
+            <div class="form-group">
+                <label for="price">Price: </label>
+                <input type="text" class="form-control-file" id="price" name="price">
+            </div>
+
+            <div class="form-group">
+                <label for="category_id">Category Id: </label>
+                <input type="number" class="form-control-file" id="category_id" name="category_id">
+            </div>
+
+            <div>
+                <input type = "submit" name ="add_product" class="add_product" value="Add Product" /> </br> 
+            </div>
+        </form>
+
+
+<?php 
+$reponse = $bdd->prepare("SELECT * FROM products");
+$reponse->execute();
+
+echo "<table border='1'>
+<tr>
+<th>Id</th>
+<th>Name</th>
+<th>Description</th>
+<th>Picture</th>
+<th>Price</th>
+<th>Category Id</th>
+</tr>";
+
+while($donnees = $reponse->fetch())
+{
+echo "<tr>";
+echo "<td>" . $donnees['id'] . "</td>";
+echo "<td>" . $donnees['name'] . "</td>";
+echo "<td>" . $donnees['description'] . "</td>";
+echo "<td>" . $donnees['picture'] . "</td>";
+echo "<td>" . $donnees['price'] . "</td>";
+echo "<td>" . $donnees['category_id'] . "</td>";
+echo "</tr>";
+}
+echo "</table>";
 ?>
     
 </body>
