@@ -33,7 +33,7 @@ h2 {
     left: 3%;
 }
 
-.alert, .alert-success {
+.alert {
     display: none;
     margin: auto;
     width: 50%;
@@ -45,6 +45,18 @@ h2 {
     animation-fill-mode: forwards; */
     
 }
+
+.alert-danger{
+    width: 80%;
+    text-align: center;
+    top: 20px;
+   
+    animation: none;
+    /* -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards; */
+    
+}
+
 @keyframes cssAnimation {
     0% {
         opacity: 0;

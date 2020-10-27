@@ -1,30 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-  <link rel="stylesheet" href="style.css">
-  <title>Registration</title>
-</head>
-<body>
-  <?php
+<?php
     const ERROR_LOG_FILE = 'PDO_Errors.log';
     const DB_HOST = "localhost";
     const DB_USERNAME = "jb";
     const DB_PASSWORD = "toto";
     const DB_PORT = "3306";
-    const DB_NAME = "myshopdb";
+    const DB_NAME = "my_shop";
 
     $email= $_POST['email'];
-    $name= $_POST['user'];
+    $username= $_POST['username'];
     $password = $_POST['password']; 
     $hash = password_hash($password, PASSWORD_DEFAULT);
 
 
 
-    function add_user ($email, $name, $hash) {
+    function add_user ($email, $username, $hash) {
         try {
             $db = connect_db(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_PORT, DB_NAME);
             $sql = "SELECT email from users where email = '$email'";
@@ -32,7 +21,7 @@
             $query->execute();
             $arrayUsers = $query->fetchAll();
             if ($arrayUsers == null){
-                $sql = "INSERT INTO users (name, password, email, created_at) VALUES ('$name', '$hash', '$email', CURRENT_TIMESTAMP)";
+                $sql = "INSERT INTO users (username, password, email, admin, created_at) VALUES ('$username', '$hash', '$email', 0, CURRENT_TIMESTAMP)";
                 $query = $db->prepare($sql);
                 $query->execute();
                 $arrayUsers = $query->fetchAll();
@@ -62,10 +51,10 @@
    
     if(isset($_POST['submit'])) {
       // Check if name has been entered
-      if(empty($_POST['user'])) {
-        $errName= 'Please enter your user name';
+      if(empty($_POST['username'])) {
+        $errName= 'Please enter your username';
       }
-      else if ((strlen($_POST['user'])) < 4) {
+      else if ((strlen($_POST['username'])) < 4) {
         $errName= 'Your username should be at least 4 characters long';
       }
       // Check if email has been entered and is valid
@@ -81,7 +70,8 @@
       } 
       else {
         $successMessage = "The form has been submitted";
-        if(add_user($email, $name, $hash)) {
+        if(add_user($email, $username, $hash)) {
+            header("refresh:5; url=signin.php" );
             $success = "User successfully created";
             ?>
             <style type="text/css">#userCreated {
@@ -95,15 +85,27 @@
       }
     }
   ?>
-  
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+  <link rel="stylesheet" href="style.css">
+  <title>Sign up</title>
+</head>
+<body>
   <div class="container">
-  <span class="alert alert-success" role="alert" id="userCreated"> <?php echo $success; ?> </span>
+    <span class="alert alert-success" role="alert" id="userCreated"> <?php echo $success; ?> </span>
     <form role="form" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
-        <h2>Registration</h2>
+        <h2>Sign up</h2>
       <div class="form-group row">
         <label for="inputUser" class="col-sm-2 col-form-label">Username</label>
         <div class="col-sm-10">
-          <input type="text" class="form-control" id="inputUser" name="user" placeholder="Enter a username" value="<?php echo $name;?>">
+          <input type="text" class="form-control" id="inputUser" name="username" placeholder="Enter a username" value="<?php echo $username;?>">
           <span class="error"><?php echo $errName; ?></span>
         </div>
       </div>
