@@ -109,7 +109,7 @@ catch (PDOException $e) {
     file_put_contents(ERROR_LOG_FILE, $e, FILE_APPEND);
 }
 
-if (isset($_POST['add_user']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email']) && !empty($_POST['admin'])){
+if (isset($_POST['add_user']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email']) && isset($_POST['admin'])){
     new User($_POST['username'], $_POST['password'], $_POST['email'], $_POST['admin']);    
 }
 
@@ -171,16 +171,18 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
 $reponse = $bdd->prepare("SELECT * FROM users");
 $reponse->execute();
 
-echo "<table border='1'>
+echo "<table class='table'>
 <tr>
-<th>Id</th>
-<th>Username</th>
-<th>Password</th>
-<th>Email</th>
-<th>Admin</th>
-<th>Created_at</th>
+<thead class='thead-dark'>
+<th scope='col'>Id</th>
+<th scope='col'>Username</th>
+<th scope='col'>Password</th>
+<th scope='col'>Email</th>
+<th scope='col'>Admin</th>
+<th scope='col'>Created_at</th>
+</thead>
 </tr>";
-
+echo "<tbody>";
 while($donnees = $reponse->fetch())
 {
 echo "<tr>";
@@ -192,6 +194,7 @@ echo "<td>" . $donnees['admin'] . "</td>";
 echo "<td>" . $donnees['created_at'] . "</td>";
 echo "</tr>";
 }
+echo "</tbody>";
 echo "</table>";
 ?>
 
@@ -199,20 +202,16 @@ echo "</table>";
         <form method="post">
             <div class="form-group">
                     <label for="username">Name: </label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="name"> </br>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="name"> 
             </div>
-
             <div class="form-group">
                     <label for="description">Description: </label>
-                    <input type="test" class="form-control" id="description" name="description" placeholder="description"> </br>
+                    <input type="test" class="form-control" id="description" name="description" placeholder="description">
             </div>
-
-            
             <div class="form-group">
                 <label for="picture">Picture: </label>
                 <input type="file" class="form-control-file " id="picture" name="picture">
             </div>
-
             <div class="form-group">
                 <label for="price">Price: </label>
                 <input type="text" class="form-control" id="price" name="price">
@@ -222,10 +221,10 @@ echo "</table>";
                 <label for="category_id">Category Id: </label>
                 <input type="number" class="form-control" id="category_id" name="category_id">
             </div>
-
-            <div>
-                <input type = "submit" name ="add_product" class="add_product" value="Add Product" /> </br> 
+            <div class="form-group align-self-end">
+                    <input type = "submit" name ="add_product" class="add_product btn btn-primary" value="Add Product" /> 
             </div>
+
         </form>
 
 
@@ -233,16 +232,18 @@ echo "</table>";
 $reponse = $bdd->prepare("SELECT * FROM products");
 $reponse->execute();
 
-echo "<table border='1'>
+echo "<table class='table table-dark'>
 <tr>
-<th>Id</th>
-<th>Name</th>
-<th>Description</th>
-<th>Picture</th>
-<th>Price</th>
-<th>Category Id</th>
+<thead class='thead-dark'>
+<th scope='col'>Id</th>
+<th scope='col'>Name</th>
+<th scope='col'>Description</th>
+<th scope='col'>Picture</th>
+<th scope='col'>Price</th>
+<th scope='col'>Category Id</th>
+</thead>
 </tr>";
-
+echo "<tbody>";
 while($donnees = $reponse->fetch())
 {
 echo "<tr>";
@@ -254,6 +255,7 @@ echo "<td>" . $donnees['price'] . "</td>";
 echo "<td>" . $donnees['category_id'] . "</td>";
 echo "</tr>";
 }
+echo "</tbody>";
 echo "</table>";
 ?>
 
@@ -261,16 +263,14 @@ echo "</table>";
         <form method="post">
             <div class="form-group">
                     <label for="name_category">Name: </label>
-                    <input type="text" class="form-control" id="name_category" name="name_category" placeholder="name_category"> </br>
+                    <input type="text" class="form-control" id="name_category" name="name_category" placeholder="name_category">
             </div>
-
             <div class="form-group">
-                    <label for="parent_id">Parent Id: </label>
-                    <input type="number" class="form-control" id="parent_id" name="parent_id" placeholder="parent_id"> </br>
+                    <label for="parent_id">Parent Id (Optional): </label>
+                    <input type="number" class="form-control" id="parent_id" name="parent_id" placeholder="parent_id"> 
             </div>
-
-            <div>
-                <input type = "submit" name ="add_category" class="add_category" value="Add Category"/> </br> 
+            <div class="form-group align-self-end">
+                    <input type = "submit" name ="add_category" class="add_category btn btn-primary" value="Add Category"/> 
             </div>
         </form>
 
@@ -278,13 +278,14 @@ echo "</table>";
 $reponse = $bdd->prepare("SELECT * FROM categories");
 $reponse->execute();
 
-echo "<table border='1'>
+echo "<table class='table table-dark'>
+<thead class='thead-dark'>
 <tr>
-<th>Id</th>
-<th>Name</th>
-<th>Parent Id</th>
+<th scope='col'>Id</th>
+<th scope='col'>Name</th>
+<th scope='col'>Parent Id </th>
 </tr>";
-
+echo "</thead>";
 while($donnees = $reponse->fetch())
 {
 echo "<tr>";

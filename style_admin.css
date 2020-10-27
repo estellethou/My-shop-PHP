@@ -1,6 +1,6 @@
 body {
     box-sizing: border-box;
-    width:100%;
+    width:auto;
     margin: 20px 20px !important;
 }
 
@@ -16,14 +16,22 @@ form {
     align-content: flex-start;
 }
 
-.form-group {
-    width: 200px; 
-    margin-right: 20px;
+td {
+    /* word-wrap: break-word; */
+    overflow: scroll;
+    max-width: 250px;
 }
 
 .form-group {
+    width: 200px; 
+    margin-right: 20px;
     padding-left: 0px !important;
 }
+
+.form-group #picture{
+   box-shadow: none;
+}
+
 
 form > div > input, select {
     box-shadow:  0 .125rem .25rem rgba(0,0,0,.075);
