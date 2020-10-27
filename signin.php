@@ -25,7 +25,16 @@ function connect_user($email, $password) {
 
         if(password_verify($password, $arrayUsers[0]["password"])) {
             setcookie("username", $name["username"]);
-            header('Location: index.php');
+            $sql_admin = "SELECT admin from users where email = '$email'";
+            $query_admin = $db->prepare($sql_admin);
+            $query_admin->execute();
+            $isAdmin = $query_admin->fetch();
+            if($isAdmin[0] == "1") {
+                header('Location: admin.php');
+            }
+            else {
+                header('Location: index.php');
+            }
         }
         else if (!empty($_POST["email"])){
             ?>
@@ -92,6 +101,7 @@ if (isset($_POST["submit"]) && ((empty($_POST["email"]) || empty($_POST["passwor
         </div>
         <div class="form-group row">
             <input type="submit" value="Sign in" name="submit" class="btn btn-primary"/>
+            <a href="signup.php"> Not a user yet ? Click here to sign up.</a>
         </div>
     </form>
 </body>
