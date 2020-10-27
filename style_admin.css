@@ -1,0 +1,31 @@
+body {
+    box-sizing: border-box;
+    max-width: 1200px;
+    margin: 20px 20px !important;
+}
+
+h1 {
+    text-align: center;
+}
+
+form {
+    padding: 5px 0px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-content: flex-start;
+}
+
+.form-group {
+    width: 200px; 
+    margin-right: 20px;
+}
+
+.form-group {
+    padding-left: 0px !important;
+}
+
+form > div > input, select {
+    box-shadow:  0 .125rem .25rem rgba(0,0,0,.075);
+}
+

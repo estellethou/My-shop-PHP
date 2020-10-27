@@ -130,7 +130,7 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
     <meta name="author" content="All Stars" />
     <meta name="description"
         content="All stars is a concept store of furnitures for your appartement. You will find amazing design furnitures for your living room, your kitchen, your batchroom and your bedroom." />
-    <link href="style.css" rel="stylesheet" />
+    <link href="style_admin.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
     <title>All stars - Concept Store</title>
@@ -142,29 +142,28 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
         <form method="post">
             <div class="form-group">
                     <label for="username">Username: </label>
-                    <input type="text" class="form-control" id="username" name="username" placeholder="username"> </br>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="username"> 
             </div>
 
             <div class="form-group">
                     <label for="password">Password: </label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="password"> </br>
+                    <input type="password" class="form-control" id="password" name="password" placeholder="password"> 
             </div>
 
             <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"></br>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com">
             </div>
 
             <div class="form-group">
-                <label for="admin">Select 1 to give ADMIN access. Otherwise select 0 </label>
+                <label for="admin">1 for admin 0 otherwise </label>
                 <select class="form-control" id="admin" name="admin">
                 <option>0</option>
                 <option>1</option>
                 </select>
             </div>
-
-            <div>
-                <input type = "submit" name ="add_user" class="add_user" value="Add user" /> </br> 
+            <div class="form-group align-self-end">
+                <input type="submit" value="Add user" name="add_user" class="btn btn-primary add_user"/>
             </div>
         </form>
 
@@ -179,7 +178,7 @@ echo "<table border='1'>
 <th>Password</th>
 <th>Email</th>
 <th>Admin</th>
-<th>Created at</th>
+<th>Created_at</th>
 </tr>";
 
 while($donnees = $reponse->fetch())
