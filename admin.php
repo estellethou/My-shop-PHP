@@ -58,7 +58,7 @@ class Category {
         }
 
         $reponse = $bdd->prepare("INSERT INTO categories(name, parent_id) 
-                                  VALUES (?, ?;");
+                                  VALUES (?, ?);");
         $reponse->bindParam(1, $this->name_category, PDO::PARAM_STR);
         $reponse->bindParam(2, $this->parent_id, PDO::PARAM_INT);
         $reponse->execute();
@@ -109,16 +109,15 @@ catch (PDOException $e) {
     file_put_contents(ERROR_LOG_FILE, $e, FILE_APPEND);
 }
 
-if (isset($_POST['add_user'])){
+if (isset($_POST['add_user']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email']) && !empty($_POST['admin'])){
     new User($_POST['username'], $_POST['password'], $_POST['email'], $_POST['admin']);    
 }
 
-if (isset($_POST['add_product'])) {
-    $a =new Product($_POST['name'], $_POST['description'], $_POST['picture'], $_POST['price'], $_POST['category_id']);
-    var_dump($a);
+if (isset($_POST['add_product']) && !empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['picture']) && !empty($_POST['price']) && !empty($_POST['category_id'])) {
+    new Product($_POST['name'], $_POST['description'], $_POST['picture'], $_POST['price'], $_POST['category_id']);
 }
 
-if (isset($_POST['add_category'])) {
+if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($_POST['parent_id'])) {
     new Category($_POST['name_category'], $_POST['parent_id']);
 }
 ?>
@@ -197,7 +196,7 @@ echo "</tr>";
 echo "</table>";
 ?>
 
-<h2> Add Product </h2>   
+<h2> Add Products </h2>   
         <form method="post">
             <div class="form-group">
                     <label for="username">Name: </label>
@@ -258,6 +257,45 @@ echo "</tr>";
 }
 echo "</table>";
 ?>
-    
+
+<h2> Add Categories </h2>   
+        <form method="post">
+            <div class="form-group">
+                    <label for="name_category">Name: </label>
+                    <input type="text" class="form-control" id="name_category" name="name_category" placeholder="name_category"> </br>
+            </div>
+
+            <div class="form-group">
+                    <label for="parent_id">Parent Id: </label>
+                    <input type="number" class="form-control" id="parent_id" name="parent_id" placeholder="parent_id"> </br>
+            </div>
+
+            <div>
+                <input type = "submit" name ="add_category" class="add_category" value="Add Category"/> </br> 
+            </div>
+        </form>
+
+<?php 
+$reponse = $bdd->prepare("SELECT * FROM categories");
+$reponse->execute();
+
+echo "<table border='1'>
+<tr>
+<th>Id</th>
+<th>Name</th>
+<th>Parent Id</th>
+</tr>";
+
+while($donnees = $reponse->fetch())
+{
+echo "<tr>";
+echo "<td>" . $donnees['id'] . "</td>";
+echo "<td>" . $donnees['name'] . "</td>";
+echo "<td>" . $donnees['parent_id'] . "</td>";
+echo "</tr>";
+}
+echo "</table>";
+?>
+
 </body>
 </html>
