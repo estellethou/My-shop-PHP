@@ -48,7 +48,6 @@
         }
         return $bdd;
     }
-   
     if(isset($_POST['submit'])) {
       // Check if name has been entered
       if(empty($_POST['username'])) {
@@ -132,6 +131,7 @@
       </div>
       <div class="form-group row">
           <input type="submit" value="Sign up" name="submit" class="btn btn-primary"/> 
+          <a href="signin.php"> Already signed up ? Click here to sign in.</a>
     </form>
   </div>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>

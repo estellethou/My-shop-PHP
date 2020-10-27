@@ -30,9 +30,11 @@ function connect_user($email, $password) {
             $query_admin->execute();
             $isAdmin = $query_admin->fetch();
             if($isAdmin[0] == "1") {
+                setcookie("admin", true);
                 header('Location: admin.php');
             }
             else {
+                setcookie("admin", false);
                 header('Location: index.php');
             }
         }
