@@ -1,4 +1,8 @@
 <?php
+#if (!$_COOKIE['admin']) {
+#    header("Location: index.php");
+#   }
+
 class Product {
     const ERROR_LOG_FILE = "errors.log";
     public $name;
@@ -69,7 +73,6 @@ class User {
     public $email;
     public $admin;
     
-    
     public function __construct($username, $password, $email, $admin){
         $this->username = $username;
         $this->password = $password;
@@ -85,20 +88,38 @@ class User {
             file_put_contents(ERROR_LOG_FILE, $e, FILE_APPEND);
         }
 
-        $reponse = $bdd->prepare("INSERT INTO users(username, password, email, admin) 
-                                  VALUES (?, ?, ?, ?;");
+        $reponse = $bdd->prepare("INSERT INTO users(username, password, email, admin, created_at) 
+                                  VALUES (?, ?, ?, ?, NOW());");
         $reponse->bindParam(1, $this->username, PDO::PARAM_STR);
         $reponse->bindParam(2, $this->password, PDO::PARAM_STR);
         $reponse->bindParam(3, $this->email, PDO::PARAM_STR);
         $reponse->bindParam(4, $this->admin, PDO::PARAM_INT);
         $reponse->execute();
+        
         #echo "User created" . PHP_EOL;
     }
 } 
 
-$_POST['name'] = new Product($_POST['name'], $_POST['description'], $_POST['picture'], $_POST['price'], $_POST['category_id']);
-$_POST['name_category'] = new Category($_POST['name_category'], $_POST['parent_id']);
-$_POST['username'] = new User($_POST['username'], $_POST['password'], $_POST['email'], $_POST['admin']);
+try {
+    $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop", 'root', 'root');
+    #echo "Connection to DB successful" . PHP_EOL;
+} 
+catch (PDOException $e) {
+    echo 'PDO ERROR: ' . $e->getMessage() . " storage in " . ERROR_LOG_FILE . ". Error connection to DB" . PHP_EOL;
+    file_put_contents(ERROR_LOG_FILE, $e, FILE_APPEND);
+}
+
+if (isset($_POST['add_user'])){
+    new User($_POST['username'], $_POST['password'], $_POST['email'], $_POST['admin']);    
+}
+
+if (isset($_POST['add_product'])) {
+    $_POST['name'] = new Product($_POST['name'], $_POST['description'], $_POST['picture'], $_POST['price'], $_POST['category_id']);
+}
+
+if (isset($_POST['add_category'])) {
+    $_POST['name_category'] = new Category($_POST['name_category'], $_POST['parent_id']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -118,7 +139,7 @@ $_POST['username'] = new User($_POST['username'], $_POST['password'], $_POST['em
 <body>
 <h1> Administration page </h1>
     <h2> Add Users </h2>   
-        <form>
+        <form method="post">
             <div class="form-group">
                     <label for="username">Username: </label>
                     <input type="text" class="form-control" id="username" name="username" placeholder="username"> </br>
@@ -131,39 +152,52 @@ $_POST['username'] = new User($_POST['username'], $_POST['password'], $_POST['em
 
             <div class="form-group">
                     <label for="email">Email address</label>
-                    <input type="email" class="form-control" id="email" placeholder="name@example.com"></br>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="name@example.com"></br>
             </div>
 
             <div class="form-group">
                 <label for="admin">Select 1 to give ADMIN access. Otherwise select 0 </label>
-                <select class="form-control" id="admin">
+                <select class="form-control" id="admin" name="admin">
                 <option>0</option>
                 <option>1</option>
                 </select>
             </div>
+
+            <div>
+                <input type = "submit" name ="add_user" class="add_user" value="Add user" /> </br> 
+            </div>
         </form>
+
+<?php 
+
+$reponse = $bdd->prepare("SELECT * FROM users");
+$reponse->execute();
+
+echo "<table border='1'>
+<tr>
+<th>Id</th>
+<th>Username</th>
+<th>Password</th>
+<th>Email</th>
+<th>Admin</th>
+<th>Created at</th>
+</tr>";
+
+while($donnees = $reponse->fetch())
+{
+echo "<tr>";
+echo "<td>" . $donnees['id'] . "</td>";
+echo "<td>" . $donnees['username'] . "</td>";
+echo "<td>" . $donnees['password'] . "</td>";
+echo "<td>" . $donnees['email'] . "</td>";
+echo "<td>" . $donnees['admin'] . "</td>";
+echo "<td>" . $donnees['created_at'] . "</td>";
+echo "</tr>";
+}
+echo "</table>";
+
+$reponse->closeCursor();
+?>
     
-        <table class="table">
-            <thead class="thead-dark">
-                <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Username</th>
-                <th scope="col">Password</th>
-                <th scope="col">Email</th>
-                <th scope="col">Admin (1)</th>
-                <th scope="col">Created at</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                <td>1</td>
-                <td>Estelle</td>
-                <td>hash</td>
-                <td>estelle@gmail.com</td>
-                <td>1</td>
-                <td>12.09.2020</td>
-                </tr>
-            </tbody>
-        </table>
 </body>
 </html>
