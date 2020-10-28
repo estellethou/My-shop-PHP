@@ -167,7 +167,10 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
                 <input type="submit" value="Add User" name="add_user" class="btn btn-primary add_user"/>
             </div>
         </form>
-
+        <div class="container search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search Users" aria-label="Search">
+            <button class="btn btn-primary" type="submit">Search</button>
+        </div>
 <?php 
 $reponse = $bdd->prepare("SELECT * FROM users");
 $reponse->execute();
@@ -188,12 +191,12 @@ echo "<tbody>";
 while($donnees = $reponse->fetch())
 {
 echo "<tr>";
-echo "<td>" . $donnees['id'] . "</td>";
-echo "<td>" . $donnees['username'] . "</td>";
-echo "<td>" . $donnees['password'] . "</td>";
-echo "<td>" . $donnees['email'] . "</td>";
-echo "<td>" . $donnees['admin'] . "</td>";
-echo "<td>" . $donnees['created_at'] . "</td>";
+echo "<td><input value=$donnees[id]></td>";
+echo "<td><input value=$donnees[username]></td>";
+echo "<td><input value=$donnees[password]></td>";
+echo "<td><input value=$donnees[email]></td>";
+echo "<td><input value=$donnees[admin]></td>";
+echo "<td><input value=$donnees[created_at]></td>";
 echo "<td> <input type = 'submit' name ='edit' class='add_category btn btn-primary' value='Edit User'/> </td>";
 echo "</tr>";
 }
@@ -249,12 +252,12 @@ echo "<tbody>";
 while($donnees = $reponse->fetch())
 {
 echo "<tr>";
-echo "<td>" . $donnees['id'] . "</td>";
-echo "<td>" . $donnees['name'] . "</td>";
-echo "<td>" . $donnees['description'] . "</td>";
-echo "<td>" . $donnees['picture'] . "</td>";
-echo "<td>" . $donnees['price'] . "</td>";
-echo "<td>" . $donnees['category_id'] . "</td>";
+echo "<td><input value=$donnees[id]></td>";
+echo "<td><input value=$donnees[name]></td>";
+echo "<td><input value=$donnees[description]></td>";
+echo "<td><input value=$donnees[picture]></td>";
+echo "<td><input value=$donnees[price]></td>";
+echo "<td><input value=$donnees[category_id]></td>";
 echo "</tr>";
 }
 echo "</tbody>";
@@ -275,7 +278,6 @@ echo "</table>";
                     <input type = "submit" name ="add_category" class="add_category btn btn-primary" value="Add Category"/> 
             </div>
         </form>
-
 <?php 
 $reponse = $bdd->prepare("SELECT * FROM categories");
 $reponse->execute();
@@ -291,9 +293,9 @@ echo "</thead>";
 while($donnees = $reponse->fetch())
 {
 echo "<tr>";
-echo "<td>" . $donnees['id'] . "</td>";
-echo "<td>" . $donnees['name'] . "</td>";
-echo "<td>" . $donnees['parent_id'] . "</td>";
+echo "<td><input value=$donnees[id]></td>";
+echo "<td><input value=$donnees[name]></td>";
+echo "<td><input value=$donnees[parent_id]></td>";
 echo "</tr>";
 }
 echo "</table>";
