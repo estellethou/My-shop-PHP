@@ -113,14 +113,12 @@ class User {
 } 
 
 function deleteUserIntoDb(){
-    if (isset($_POST['delete_user'])){
         $bdd = connectToDb();
         $response = $bdd->prepare("DELETE FROM users WHERE id='" . $_POST['id'] . "';");
         $response->execute();
         $response = $bdd->prepare("SELECT * FROM users");
         $response->execute();
         echo "<meta http-equiv='refresh' content='0'>";
-    }
 }
 
 function editUserIntoDb(){
@@ -139,25 +137,21 @@ function editUserIntoDb(){
 }
 
 function deleteProductIntoDb(){
-    if (isset($_POST['delete_product'])){
         $bdd = connectToDb();
         $response = $bdd->prepare("DELETE FROM products WHERE id='" . $_POST['id'] . "';");
         $response->execute();
         $response = $bdd->prepare("SELECT * FROM products");
         $response->execute();
         echo "<meta http-equiv='refresh' content='0'>";
-    }
 }
 
 function deleteCategoryIntoDb(){
-    if (isset($_POST['delete_category'])){
         $bdd = connectToDb();
         $response = $bdd->prepare("DELETE FROM categories WHERE id='" . $_POST['id'] . "';");
         $response->execute();
         $response = $bdd->prepare("SELECT * FROM categories");
         $response->execute();
         echo "<meta http-equiv='refresh' content='0'>";
-    }
 }
 
 function connectToDb(){
@@ -256,7 +250,9 @@ else {
     $response->execute();
     printTable($response, $arrayUsers, "user");
 }
-deleteUserIntoDb();
+if (isset($_POST['delete_user'])){
+    deleteUserIntoDb();
+}
 ?>
 
 <h2> Add Products </h2>   
@@ -307,7 +303,9 @@ else {
     $response->execute();
     printTable($response, $arrayUsers, "user");
 }
-deleteProductIntoDb();
+if (isset($_POST['delete_product'])) {
+    deleteProductIntoDb();
+}
 ?>
 
 <h2> Add Categories </h2>   
@@ -345,7 +343,9 @@ else {
     $response->execute();
     printTable($response, $arrayCategories, "category");
 }
-deleteCategoryIntoDb();
+if (isset($_POST['delete_category'])) {
+    deleteCategoryIntoDb();
+}
 ?>
 
 </body>
