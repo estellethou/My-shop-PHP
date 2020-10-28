@@ -128,7 +128,6 @@ function deleteUserIntoDb(){
 }
 
 function editUserIntoDb(){
-    if (isset($_POST['edit_user'])){
         $bdd = connectToDb();
         $response = $bdd->prepare("UPDATE users 
         SET username='" . $_POST['username'] . "', 
@@ -139,7 +138,6 @@ function editUserIntoDb(){
         $response = $bdd->prepare("SELECT * FROM users");
         $response->execute();
         echo "<meta http-equiv='refresh' content='0'>";
-    }
 }
 
 function deleteProductIntoDb(){
@@ -149,6 +147,17 @@ function deleteProductIntoDb(){
         $response = $bdd->prepare("SELECT * FROM products");
         $response->execute();
         echo "<meta http-equiv='refresh' content='0'>";
+}
+
+function editProductIntoDb(){
+    $bdd = connectToDb();
+    $response = $bdd->prepare("UPDATE products 
+    SET name='" . $_POST['name'] . "', 
+    parent_id='" . $_POST['parent_id'] . "' WHERE id='" . $_POST['id'] . "';");
+    $response->execute();
+    $response = $bdd->prepare("SELECT * FROM products");
+    $response->execute();
+    echo "<meta http-equiv='refresh' content='0'>";
 }
 
 function deleteCategoryIntoDb(){
@@ -259,6 +268,9 @@ else {
 if (isset($_POST['delete_user'])){
     deleteUserIntoDb();
 }
+if (isset($_POST['edit_user'])) {
+    editUserIntoDb();
+}
 ?>
 
 <h2> Add Products </h2>   
@@ -311,6 +323,10 @@ else {
 }
 if (isset($_POST['delete_product'])) {
     deleteProductIntoDb();
+}
+if (isset($_POST['edit_product'])){
+    echo "hello";
+    editProductIntoDb();
 }
 ?>
 
