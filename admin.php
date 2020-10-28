@@ -163,7 +163,7 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
                 </select>
             </div>
             <div class="form-group align-self-end">
-                <input type="submit" value="Add user" name="add_user" class="btn btn-primary add_user"/>
+                <input type="submit" value="Add User" name="add_user" class="btn btn-primary add_user"/>
             </div>
         </form>
 
@@ -171,7 +171,7 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
 $reponse = $bdd->prepare("SELECT * FROM users");
 $reponse->execute();
 
-echo "<table class='table'>
+echo "<table class='table table-striped'>
 <tr>
 <thead class='thead-dark'>
 <th scope='col'>Id</th>
@@ -180,6 +180,7 @@ echo "<table class='table'>
 <th scope='col'>Email</th>
 <th scope='col'>Admin</th>
 <th scope='col'>Created_at</th>
+<th scope='col'>Edit Users</th>
 </thead>
 </tr>";
 echo "<tbody>";
@@ -192,12 +193,12 @@ echo "<td>" . $donnees['password'] . "</td>";
 echo "<td>" . $donnees['email'] . "</td>";
 echo "<td>" . $donnees['admin'] . "</td>";
 echo "<td>" . $donnees['created_at'] . "</td>";
+echo "<td> <input type = 'submit' name ='edit' class='add_category btn btn-primary' value='Edit User'/> </td>";
 echo "</tr>";
 }
 echo "</tbody>";
 echo "</table>";
 ?>
-
 <h2> Add Products </h2>   
         <form method="post">
             <div class="form-group">
@@ -232,7 +233,7 @@ echo "</table>";
 $reponse = $bdd->prepare("SELECT * FROM products");
 $reponse->execute();
 
-echo "<table class='table table-dark'>
+echo "<table class='table table-striped'>
 <tr>
 <thead class='thead-dark'>
 <th scope='col'>Id</th>
@@ -278,7 +279,7 @@ echo "</table>";
 $reponse = $bdd->prepare("SELECT * FROM categories");
 $reponse->execute();
 
-echo "<table class='table table-dark'>
+echo "<table class='table table-striped'>
 <thead class='thead-dark'>
 <tr>
 <th scope='col'>Id</th>

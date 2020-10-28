@@ -1,8 +1,8 @@
 <?php
 const ERROR_LOG_FILE = 'PDO_Errors.log';
 const DB_HOST = "localhost";
-const DB_USERNAME = "jb";
-const DB_PASSWORD = "toto";
+const DB_USERNAME = "root";
+const DB_PASSWORD = "root";
 const DB_PORT = "3306";
 const DB_NAME = "my_shop";
 
