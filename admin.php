@@ -21,7 +21,7 @@ function printTable ($response, $tableColumns, $objectType) {
         echo "<form method=post>";
         echo "<tr>";
         foreach ($tableColumns as $a) {
-            echo "<td><input value=" . $donnees[strtolower($a)] . "></td>";
+            echo "<td><input value=" . $donnees[strtolower($a)] . " name = " . strtolower($a) ."></td>";
         }  
         echo "<td> <input type = 'submit' name ='edit_$objectType' class='add_category btn btn-primary' value='Edit $objectType'/> </td>";
         echo "<td> <input type = 'submit' name ='delete_$objectType' class='add_category btn btn-danger' value='Delete $objectType'/> </td>";
@@ -291,17 +291,17 @@ if (isset($_POST['delete_user'])){
 <?php 
 $arrayProducts = array("Id", "Name", "Description", "Picture", "Price", "Category id");
 
-if(isset($_POST['search_users'])) {
-    $search = strtolower($_POST['input_search_users']);
-    $sql = "SELECT * FROM users WHERE LOWER(CONCAT(id, username, password, email, admin)) LIKE '%$search%'";
+if(isset($_POST['search_products'])) {
+    $search = strtolower($_POST['input_search_products']);
+    $sql = "SELECT * FROM users WHERE LOWER(CONCAT(id, name, description, picture, price, category_id)) LIKE '%$search%'";
     $response = $bdd->prepare($sql);
     $response->execute();
-    printTable($response, $arrayUsers, "user");
+    printTable($response, $arrayProducts, "product");
 }
 else {
-    $response = $bdd->prepare("SELECT * FROM users");
+    $response = $bdd->prepare("SELECT * FROM products");
     $response->execute();
-    printTable($response, $arrayUsers, "user");
+    printTable($response, $arrayProducts, "product");
 }
 if (isset($_POST['delete_product'])) {
     deleteProductIntoDb();
