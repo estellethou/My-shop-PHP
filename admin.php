@@ -60,7 +60,6 @@ class Product {
         $response->bindParam(4, intval($this->price), PDO::PARAM_INT);
         $response->bindParam(5, intval($this->category_id), PDO::PARAM_INT);
         $response->execute();
-        #var_dump($response->errorInfo());
     }
 } 
 
@@ -116,7 +115,22 @@ class User {
 function deleteUserIntoDb(){
     if (isset($_POST['delete_user'])){
         $bdd = connectToDb();
-        $response = $bdd->prepare("DELETE FROM users WHERE username='" . $_POST['username'] . "' AND email= '" . $_POST['email'] . "';");
+        $response = $bdd->prepare("DELETE FROM users WHERE id='" . $_POST['id'] . "';");
+        $response->execute();
+        $response = $bdd->prepare("SELECT * FROM users");
+        $response->execute();
+        echo "<meta http-equiv='refresh' content='0'>";
+    }
+}
+
+function editUserIntoDb(){
+    if (isset($_POST['edit_user'])){
+        $bdd = connectToDb();
+        $response = $bdd->prepare("UPDATE users 
+        SET username='" . $_POST['username'] . "', 
+        password='" . $_POST['password'] . "',
+        email='" . $_POST['email'] . "',
+        admin='" . $_POST['admin'] . "' WHERE id='" . $_POST['id'] . "';");
         $response->execute();
         $response = $bdd->prepare("SELECT * FROM users");
         $response->execute();
@@ -125,10 +139,9 @@ function deleteUserIntoDb(){
 }
 
 function deleteProductIntoDb(){
-    echo "hello";
     if (isset($_POST['delete_product'])){
         $bdd = connectToDb();
-        $response = $bdd->prepare("DELETE FROM products WHERE name='" . $_POST['name'] . "';");
+        $response = $bdd->prepare("DELETE FROM products WHERE id='" . $_POST['id'] . "';");
         $response->execute();
         $response = $bdd->prepare("SELECT * FROM products");
         $response->execute();
@@ -139,7 +152,7 @@ function deleteProductIntoDb(){
 function deleteCategoryIntoDb(){
     if (isset($_POST['delete_category'])){
         $bdd = connectToDb();
-        $response = $bdd->prepare("DELETE FROM categories WHERE name='" . $_POST['name_category'] . "';");
+        $response = $bdd->prepare("DELETE FROM categories WHERE id='" . $_POST['id'] . "';");
         $response->execute();
         $response = $bdd->prepare("SELECT * FROM categories");
         $response->execute();
@@ -243,6 +256,7 @@ else {
     $response->execute();
     printTable($response, $arrayUsers, "user");
 }
+deleteUserIntoDb();
 ?>
 
 <h2> Add Products </h2>   
@@ -293,7 +307,7 @@ else {
     $response->execute();
     printTable($response, $arrayUsers, "user");
 }
-
+deleteProductIntoDb();
 ?>
 
 <h2> Add Categories </h2>   
@@ -331,7 +345,7 @@ else {
     $response->execute();
     printTable($response, $arrayCategories, "category");
 }
-
+deleteCategoryIntoDb();
 ?>
 
 </body>
