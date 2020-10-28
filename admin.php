@@ -128,32 +128,36 @@ function deleteUserIntoDb(){
 }
 
 function editUserIntoDb(){
-        $bdd = connectToDb();
-        $response = $bdd->prepare("UPDATE users 
-        SET username='" . $_POST['username'] . "', 
-        password='" . $_POST['password'] . "',
-        email='" . $_POST['email'] . "',
-        admin='" . $_POST['admin'] . "' WHERE id='" . $_POST['id'] . "';");
-        $response->execute();
-        $response = $bdd->prepare("SELECT * FROM users");
-        $response->execute();
-        echo "<meta http-equiv='refresh' content='0'>";
+    $bdd = connectToDb();
+    $response = $bdd->prepare("UPDATE users 
+    SET username='" . $_POST['username'] . "', 
+    password='" . $_POST['password'] . "',
+    email='" . $_POST['email'] . "',
+    admin='" . $_POST['admin'] . "' WHERE id='" . $_POST['id'] . "';");
+    $response->execute();
+    $response = $bdd->prepare("SELECT * FROM users");
+    $response->execute();
+    echo "<meta http-equiv='refresh' content='0'>";
 }
 
 function deleteProductIntoDb(){
-        $bdd = connectToDb();
-        $response = $bdd->prepare("DELETE FROM products WHERE id='" . $_POST['id'] . "';");
-        $response->execute();
-        $response = $bdd->prepare("SELECT * FROM products");
-        $response->execute();
-        echo "<meta http-equiv='refresh' content='0'>";
+    $bdd = connectToDb();
+    $response = $bdd->prepare("DELETE FROM products WHERE id='" . $_POST['id'] . "';");
+    $response->execute();
+    $response = $bdd->prepare("SELECT * FROM products");
+    $response->execute();
+    echo "<meta http-equiv='refresh' content='0'>";
 }
 
 function editProductIntoDb(){
     $bdd = connectToDb();
     $response = $bdd->prepare("UPDATE products 
     SET name='" . $_POST['name'] . "', 
-    parent_id='" . $_POST['parent_id'] . "' WHERE id='" . $_POST['id'] . "';");
+    description='" . $_POST['description'] . "',
+    picture='" . $_POST['picture'] . "',
+    category_id='" . $_POST['category_id'] . "',
+    price='" . $_POST['price'] . "' WHERE id='" . $_POST['id'] . "';");
+    var_dump($response);
     $response->execute();
     $response = $bdd->prepare("SELECT * FROM products");
     $response->execute();
@@ -161,12 +165,23 @@ function editProductIntoDb(){
 }
 
 function deleteCategoryIntoDb(){
-        $bdd = connectToDb();
-        $response = $bdd->prepare("DELETE FROM categories WHERE id='" . $_POST['id'] . "';");
-        $response->execute();
-        $response = $bdd->prepare("SELECT * FROM categories");
-        $response->execute();
-        echo "<meta http-equiv='refresh' content='0'>";
+    $bdd = connectToDb();
+    $response = $bdd->prepare("DELETE FROM categories WHERE id='" . $_POST['id'] . "';");
+    $response->execute();
+    $response = $bdd->prepare("SELECT * FROM categories");
+    $response->execute();
+    echo "<meta http-equiv='refresh' content='0'>";
+}
+
+function editCategoryIntoDb(){
+    $bdd = connectToDb();
+    $response = $bdd->prepare("UPDATE categories 
+    SET name='" . $_POST['name'] . "', 
+    parent_id='" . $_POST['parent_id'] . "' WHERE id='" . $_POST['id'] . "';");
+    $response->execute();
+    $response = $bdd->prepare("SELECT * FROM categories");
+    $response->execute();
+    echo "<meta http-equiv='refresh' content='0'>";
 }
 
 function connectToDb(){
@@ -307,7 +322,7 @@ if (isset($_POST['edit_user'])) {
             </div>
         </form>
 <?php 
-$arrayProducts = array("Id", "Name", "Description", "Picture", "Price", "Category id");
+$arrayProducts = array("Id", "Name", "Description", "Picture", "Price", "Category_id");
 
 if(isset($_POST['search_products'])) {
     $search = strtolower($_POST['input_search_products']);
@@ -324,8 +339,8 @@ else {
 if (isset($_POST['delete_product'])) {
     deleteProductIntoDb();
 }
+
 if (isset($_POST['edit_product'])){
-    echo "hello";
     editProductIntoDb();
 }
 ?>
@@ -367,6 +382,9 @@ else {
 }
 if (isset($_POST['delete_category'])) {
     deleteCategoryIntoDb();
+}
+if (isset($_POST['edit_category'])){
+    editCategoryIntoDb();
 }
 ?>
 
