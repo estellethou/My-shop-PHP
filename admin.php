@@ -1,7 +1,7 @@
 <?php
-#if (!$_COOKIE['admin']) {
-#    header("Location: index.php");
-#   }
+if (!$_COOKIE['admin']) {
+    header("Location: index.php");
+   }
 
 class Product {
     const ERROR_LOG_FILE = "errors.log";
@@ -109,15 +109,15 @@ catch (PDOException $e) {
     file_put_contents(ERROR_LOG_FILE, $e, FILE_APPEND);
 }
 
-if (isset($_POST['add_user']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email']) && isset($_POST['admin'])){
+if (isset($_POST['add_user']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['admin'])){
     new User($_POST['username'], $_POST['password'], $_POST['email'], $_POST['admin']);    
 }
 
-if (isset($_POST['add_product']) && !empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['picture']) && !empty($_POST['price']) && !empty($_POST['category_id'])) {
+if (isset($_POST['add_product']) && isset($_POST['name']) && isset($_POST['description']) && isset($_POST['picture']) && isset($_POST['price']) && isset($_POST['category_id'])) {
     new Product($_POST['name'], $_POST['description'], $_POST['picture'], $_POST['price'], $_POST['category_id']);
 }
 
-if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($_POST['parent_id'])) {
+if (isset($_POST['add_category']) && isset($_POST['name_category']) && isset($_POST['parent_id'])) {
     new Category($_POST['name_category'], $_POST['parent_id']);
 }
 ?>
@@ -168,34 +168,34 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
         </form>
 
 <?php 
-$reponse = $bdd->prepare("SELECT * FROM users");
-$reponse->execute();
+    $reponse = $bdd->prepare("SELECT * FROM users");
+    $reponse->execute();
 
-echo "<table class='table'>
-<tr>
-<thead class='thead-dark'>
-<th scope='col'>Id</th>
-<th scope='col'>Username</th>
-<th scope='col'>Password</th>
-<th scope='col'>Email</th>
-<th scope='col'>Admin</th>
-<th scope='col'>Created_at</th>
-</thead>
-</tr>";
-echo "<tbody>";
-while($donnees = $reponse->fetch())
-{
-echo "<tr>";
-echo "<td>" . $donnees['id'] . "</td>";
-echo "<td>" . $donnees['username'] . "</td>";
-echo "<td>" . $donnees['password'] . "</td>";
-echo "<td>" . $donnees['email'] . "</td>";
-echo "<td>" . $donnees['admin'] . "</td>";
-echo "<td>" . $donnees['created_at'] . "</td>";
-echo "</tr>";
-}
-echo "</tbody>";
-echo "</table>";
+    echo "<table class='table'>
+    <tr>
+    <thead class='thead-dark'>
+    <th scope='col'>Id</th>
+    <th scope='col'>Username</th>
+    <th scope='col'>Password</th>
+    <th scope='col'>Email</th>
+    <th scope='col'>Admin</th>
+    <th scope='col'>Created_at</th>
+    </thead>
+    </tr>";
+    echo "<tbody>";
+    while($donnees = $reponse->fetch())
+    {
+    echo "<tr>";
+    echo "<td>" . $donnees['id'] . "</td>";
+    echo "<td>" . $donnees['username'] . "</td>";
+    echo "<td>" . $donnees['password'] . "</td>";
+    echo "<td>" . $donnees['email'] . "</td>";
+    echo "<td>" . $donnees['admin'] . "</td>";
+    echo "<td>" . $donnees['created_at'] . "</td>";
+    echo "</tr>";
+    }
+    echo "</tbody>";
+    echo "</table>";
 ?>
 
 <h2> Add Products </h2>   
@@ -226,7 +226,6 @@ echo "</table>";
             </div>
 
         </form>
-
 
 <?php 
 $reponse = $bdd->prepare("SELECT * FROM products");

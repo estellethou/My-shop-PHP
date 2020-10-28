@@ -1,9 +1,9 @@
 <?php
 const ERROR_LOG_FILE = 'PDO_Errors.log';
-const DB_HOST = "localhost";
-const DB_USERNAME = "jb";
-const DB_PASSWORD = "toto";
-const DB_PORT = "3306";
+const DB_HOST = "127.0.0.1";
+const DB_USERNAME = "root";
+const DB_PASSWORD = "root";
+#const DB_PORT = "3306";
 const DB_NAME = "my_shop";
 
 $email= $_POST['email'];
@@ -12,7 +12,7 @@ connect_user($email, $password);
 
 function connect_user($email, $password) {
     try {
-        $db = connect_db(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_PORT, DB_NAME);
+        $db = connect_db(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
         $sql = "SELECT password from users where email = '$email'";
         $query = $db->prepare($sql);
         $query->execute();
@@ -52,9 +52,9 @@ function connect_user($email, $password) {
 }
 
 
-function connect_db($host, $usr, $pwd, $port, $db) {
+function connect_db($host, $usr, $pwd, $db) {
     try {
-        $bdd = new PDO("mysql:host=$host:$port;dbname=" . $db . ';charset=utf8', $usr, $pwd);
+        $bdd = new PDO("mysql:host=$host;dbname=" . $db . ';charset=utf8', $usr, $pwd);
         // echo "Connection to DB successful\n";
     }
     catch (PDOException $e) {
