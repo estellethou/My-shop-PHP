@@ -115,11 +115,35 @@ class User {
 } 
 
 function deleteUserIntoDb(){
-    if (isset($_POST['delete'])){
+    if (isset($_POST['delete_user'])){
         $bdd = connectToDb();
         $reponse = $bdd->prepare("DELETE FROM users WHERE username='" . $_POST['username'] . "' AND email= '" . $_POST['email'] . "';");
         $reponse->execute();
         $reponse = $bdd->prepare("SELECT * FROM users");
+        $reponse->execute();
+        echo "<meta http-equiv='refresh' content='0'>";
+    }
+}
+
+function deleteProductIntoDb(){
+    echo "hello";
+    if (isset($_POST['delete_product'])){
+        $bdd = connectToDb();
+        $reponse = $bdd->prepare("DELETE FROM products WHERE name='" . $_POST['name'] . "';");
+        var_dump($reponse);
+        $reponse->execute();
+        $reponse = $bdd->prepare("SELECT * FROM products");
+        $reponse->execute();
+        echo "<meta http-equiv='refresh' content='0'>";
+    }
+}
+
+function deleteCategoryIntoDb(){
+    if (isset($_POST['delete_category'])){
+        $bdd = connectToDb();
+        $reponse = $bdd->prepare("DELETE FROM categories WHERE name='" . $_POST['name_category'] . "';");
+        $reponse->execute();
+        $reponse = $bdd->prepare("SELECT * FROM categories");
         $reponse->execute();
         echo "<meta http-equiv='refresh' content='0'>";
     }
@@ -248,7 +272,6 @@ else {
             <div class="form-group align-self-end">
                     <input type = "submit" name ="add_product" class="add_product btn btn-primary" value="Add Product" /> 
             </div>
-
         </form>
         <form method="post">
             <div class="container search">
@@ -267,8 +290,8 @@ if(isset($_POST['search_products'])) {
     printTable($response, $arrayProducts, "product");
 }
 else {
-    $response = $bdd->prepare("SELECT * FROM products");
     $response->execute();
+    $response = $bdd->prepare("SELECT * FROM products");
     printTable($response, $arrayProducts, "product");
 }
 
