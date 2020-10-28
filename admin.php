@@ -80,9 +80,9 @@ class Category {
 
         $response = $bdd->prepare("INSERT INTO categories(name, parent_id) 
                                   VALUES (?, ?);");
-        $reponse->bindParam(1, $this->name_category, PDO::PARAM_STR);
-        $reponse->bindParam(2, $this->parent_id, PDO::PARAM_INT);
-        $reponse->execute();
+        $response->bindParam(1, $this->name_category, PDO::PARAM_STR);
+        $response->bindParam(2, $this->parent_id, PDO::PARAM_INT);
+        $response->execute();
     } 
 } 
 
@@ -103,24 +103,23 @@ class User {
 
     public function insertUserIntoDb(){
         $bdd = connectToDb();
-
         $response = $bdd->prepare("INSERT INTO users(username, password, email, admin, created_at) 
                                   VALUES (?, ?, ?, ?, NOW());");
-        $reponse->bindParam(1, $this->username, PDO::PARAM_STR);
-        $reponse->bindParam(3, $this->email, PDO::PARAM_STR);
-        $reponse->bindParam(2, $this->password, PDO::PARAM_STR);
-        $reponse->bindParam(4, $this->admin, PDO::PARAM_INT);
-        $reponse->execute();
+        $response->bindParam(1, $this->username, PDO::PARAM_STR);
+        $response->bindParam(3, $this->email, PDO::PARAM_STR);
+        $response->bindParam(2, $this->password, PDO::PARAM_STR);
+        $response->bindParam(4, $this->admin, PDO::PARAM_INT);
+        $response->execute();
     }
 } 
 
 function deleteUserIntoDb(){
     if (isset($_POST['delete_user'])){
         $bdd = connectToDb();
-        $reponse = $bdd->prepare("DELETE FROM users WHERE username='" . $_POST['username'] . "' AND email= '" . $_POST['email'] . "';");
-        $reponse->execute();
-        $reponse = $bdd->prepare("SELECT * FROM users");
-        $reponse->execute();
+        $response = $bdd->prepare("DELETE FROM users WHERE username='" . $_POST['username'] . "' AND email= '" . $_POST['email'] . "';");
+        $response->execute();
+        $response = $bdd->prepare("SELECT * FROM users");
+        $response->execute();
         echo "<meta http-equiv='refresh' content='0'>";
     }
 }
@@ -129,11 +128,10 @@ function deleteProductIntoDb(){
     echo "hello";
     if (isset($_POST['delete_product'])){
         $bdd = connectToDb();
-        $reponse = $bdd->prepare("DELETE FROM products WHERE name='" . $_POST['name'] . "';");
-        var_dump($reponse);
-        $reponse->execute();
-        $reponse = $bdd->prepare("SELECT * FROM products");
-        $reponse->execute();
+        $response = $bdd->prepare("DELETE FROM products WHERE name='" . $_POST['name'] . "';");
+        $response->execute();
+        $response = $bdd->prepare("SELECT * FROM products");
+        $response->execute();
         echo "<meta http-equiv='refresh' content='0'>";
     }
 }
@@ -141,10 +139,10 @@ function deleteProductIntoDb(){
 function deleteCategoryIntoDb(){
     if (isset($_POST['delete_category'])){
         $bdd = connectToDb();
-        $reponse = $bdd->prepare("DELETE FROM categories WHERE name='" . $_POST['name_category'] . "';");
-        $reponse->execute();
-        $reponse = $bdd->prepare("SELECT * FROM categories");
-        $reponse->execute();
+        $response = $bdd->prepare("DELETE FROM categories WHERE name='" . $_POST['name_category'] . "';");
+        $response->execute();
+        $response = $bdd->prepare("SELECT * FROM categories");
+        $response->execute();
         echo "<meta http-equiv='refresh' content='0'>";
     }
 }
@@ -152,8 +150,9 @@ function deleteCategoryIntoDb(){
 function connectToDb(){
     try {
         $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop", 'root', 'root');
+        $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop" . ';charset=utf8', "root", "root");
         return($bdd);
-        #echo "Connection to DB successful" . PHP_EOL;
+        //echo "Connection to DB successful" . PHP_EOL;
     } 
     catch (PDOException $e) {
         echo 'PDO ERROR: ' . $e->getMessage() . " storage in " . ERROR_LOG_FILE . ". Error connection to DB" . PHP_EOL;
@@ -231,7 +230,7 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
         </form>
 <?php 
 
-$arrayUsers = array("Id", "Username", "Password", "Email", "Admin", "Created_at", "Edit users");
+$arrayUsers = array("Id", "Username", "Password", "Email", "Admin", "Created_at");
 if(isset($_POST['search_users'])) {
     $search = strtolower($_POST['input_search_users']);
     $sql = "SELECT * FROM users WHERE LOWER(CONCAT(id, username, password, email, admin)) LIKE '%$search%'";
@@ -282,17 +281,17 @@ else {
 <?php 
 $arrayProducts = array("Id", "Name", "Description", "Picture", "Price", "Category id");
 
-if(isset($_POST['search_products'])) {
-    $search = strtolower($_POST['input_search_products']);
-    $sql = "SELECT * FROM products WHERE LOWER(CONCAT(id, name, description, picture, price)) LIKE '%$search%'";
+if(isset($_POST['search_users'])) {
+    $search = strtolower($_POST['input_search_users']);
+    $sql = "SELECT * FROM users WHERE LOWER(CONCAT(id, username, password, email, admin)) LIKE '%$search%'";
     $response = $bdd->prepare($sql);
     $response->execute();
-    printTable($response, $arrayProducts, "product");
+    printTable($response, $arrayUsers, "user");
 }
 else {
+    $response = $bdd->prepare("SELECT * FROM users");
     $response->execute();
-    $response = $bdd->prepare("SELECT * FROM products");
-    printTable($response, $arrayProducts, "product");
+    printTable($response, $arrayUsers, "user");
 }
 
 ?>
