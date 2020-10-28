@@ -1,7 +1,7 @@
 <?php
-#if (!$_COOKIE['admin']) {
-#    header("Location: index.php");
-#   }
+if (!$_COOKIE['admin']) {
+    header("Location: index.php");
+   }
 
 class Product {
     const ERROR_LOG_FILE = "errors.log";
