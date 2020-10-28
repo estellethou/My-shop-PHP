@@ -3,6 +3,35 @@ if (!$_COOKIE['admin']) {
     header("Location: index.php");
    }
 
+interface Printing{
+    public function printTable();
+}
+
+function printTable ($response, $tableColumns, $objectType) {
+    echo "<table class='table table-striped' id='usersTable'><tr><thead class='thead-dark'>";
+    foreach ($tableColumns as $a) {
+        echo "<th scope='col'>$a</th>";
+    }  
+    echo "<th scope='col'>Edit $objectType</th>";
+    echo "<th scope='col'>Delete $objectType</th>";
+    echo "</thead></tr>";
+    echo "<tbody>";
+    while($donnees = $response->fetch())
+    {
+        echo "<form method=post>";
+        echo "<tr>";
+        foreach ($tableColumns as $a) {
+            echo "<td><input value=" . $donnees[strtolower($a)] . "></td>";
+        }  
+        echo "<td> <input type = 'submit' name ='edit_$objectType' class='add_category btn btn-primary' value='Edit $objectType'/> </td>";
+        echo "<td> <input type = 'submit' name ='delete_$objectType' class='add_category btn btn-danger' value='Delete $objectType'/> </td>";
+        echo "</tr>";
+        echo "</form>";
+    }
+    echo "</tbody>";
+    echo "</table>";
+}
+
 class Product {
     const ERROR_LOG_FILE = "errors.log";
     private $name;
@@ -23,15 +52,15 @@ class Product {
     public function insertProductIntoDb(){
         $bdd = connectToDb();
 
-        $reponse = $bdd->prepare("INSERT INTO products(name, description, picture, price, category_id) 
+        $response = $bdd->prepare("INSERT INTO products(name, description, picture, price, category_id) 
                                   VALUES (?, ?, ?, ?, ?);");
-        $reponse->bindParam(1, $this->name, PDO::PARAM_STR);
-        $reponse->bindParam(2, $this->description, PDO::PARAM_STR);
-        $reponse->bindParam(3, $this->picture, PDO::PARAM_STR);
-        $reponse->bindParam(4, intval($this->price), PDO::PARAM_INT);
-        $reponse->bindParam(5, intval($this->category_id), PDO::PARAM_INT);
-        $reponse->execute();
-        #var_dump($reponse->errorInfo());
+        $response->bindParam(1, $this->name, PDO::PARAM_STR);
+        $response->bindParam(2, $this->description, PDO::PARAM_STR);
+        $response->bindParam(3, $this->picture, PDO::PARAM_STR);
+        $response->bindParam(4, intval($this->price), PDO::PARAM_INT);
+        $response->bindParam(5, intval($this->category_id), PDO::PARAM_INT);
+        $response->execute();
+        #var_dump($response->errorInfo());
     }
 } 
 
@@ -49,7 +78,7 @@ class Category {
     public function insertCategoryIntoDb(){
         $bdd = connectToDb();
 
-        $reponse = $bdd->prepare("INSERT INTO categories(name, parent_id) 
+        $response = $bdd->prepare("INSERT INTO categories(name, parent_id) 
                                   VALUES (?, ?);");
         $reponse->bindParam(1, $this->name_category, PDO::PARAM_STR);
         $reponse->bindParam(2, $this->parent_id, PDO::PARAM_INT);
@@ -75,11 +104,11 @@ class User {
     public function insertUserIntoDb(){
         $bdd = connectToDb();
 
-        $reponse = $bdd->prepare("INSERT INTO users(username, password, email, admin, created_at) 
+        $response = $bdd->prepare("INSERT INTO users(username, password, email, admin, created_at) 
                                   VALUES (?, ?, ?, ?, NOW());");
         $reponse->bindParam(1, $this->username, PDO::PARAM_STR);
-        $reponse->bindParam(2, $this->password, PDO::PARAM_STR);
         $reponse->bindParam(3, $this->email, PDO::PARAM_STR);
+        $reponse->bindParam(2, $this->password, PDO::PARAM_STR);
         $reponse->bindParam(4, $this->admin, PDO::PARAM_INT);
         $reponse->execute();
     }
@@ -170,45 +199,27 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
                 <input type="submit" value="Add User" name="add_user" class="btn btn-primary add_user"/>
             </div>
         </form>
-            <button class="btn btn-primary" type="submit">Search</button>
-        </div>
+        <form method="post">
+            <div class="container search">
+                <input class="form-control mr-sm-2" type="search" name = "input_search_users" placeholder="Search Users" aria-label="Search">
+                <button class="btn btn-primary" type="submit" name="search_users">Filter Users</button>
+            </div>
+        </form>
 <?php 
-            <input class="form-control mr-sm-2" type="search" placeholder="Search Users" aria-label="Search">
-        <div class="container search">
-$reponse = $bdd->prepare("SELECT * FROM users");
-$reponse->execute();
 
-echo "<table class='table table-striped'>
-<tr>
-<thead class='thead-dark'>
-<th scope='col'>Id</th>
-<th scope='col'>Username</th>
-<th scope='col'>Password</th>
-<th scope='col'>Email</th>
-<th scope='col'>Admin</th>
-<th scope='col'>Created_at</th>
-<th scope='col'>Edit Users</th>
-</thead>
-</tr>";
-echo "<tbody>";
-while($donnees = $reponse->fetch())
-{
-echo "<form method='post'>";
-echo "<tr>";
-echo "<td><input name='id' value=$donnees[id]></td>";
-echo "<td><input name='username' value=$donnees[username]></td>";
-echo "<td><input name='password' value=$donnees[password]></td>";
-echo "<td><input name='email' value=$donnees[email]></td>";
-echo "<td><input name='admin' value=$donnees[admin]></td>";
-echo "<td><input name='created_at' value=$donnees[created_at]></td>";
-echo "<td> <input type='submit' name ='delete' class='add_category btn btn-primary' value='Delete User'/> </td>";
-echo "</tr>";
-echo "</form> ";
+$arrayUsers = array("Id", "Username", "Password", "Email", "Admin", "Created_at", "Edit users");
+if(isset($_POST['search_users'])) {
+    $search = strtolower($_POST['input_search_users']);
+    $sql = "SELECT * FROM users WHERE LOWER(CONCAT(id, username, password, email, admin)) LIKE '%$search%'";
+    $response = $bdd->prepare($sql);
+    $response->execute();
+    printTable($response, $arrayUsers, "user");
 }
-echo "</tbody>";
-echo "</table>";
-deleteUserIntoDb();
-$reponse->closeCursor();
+else {
+    $response = $bdd->prepare("SELECT * FROM users");
+    $response->execute();
+    printTable($response, $arrayUsers, "user");
+}
 ?>
 
 <h2> Add Products </h2>   
@@ -239,37 +250,28 @@ $reponse->closeCursor();
             </div>
 
         </form>
-
-
+        <form method="post">
+            <div class="container search">
+                <input class="form-control mr-sm-2" type="search" name = "input_search_products" placeholder="Search Products" aria-label="Search">
+                <button class="btn btn-primary" type="submit" name="search_products">Filter Products</button>
+            </div>
+        </form>
 <?php 
-$reponse = $bdd->prepare("SELECT * FROM products");
-$reponse->execute();
+$arrayProducts = array("Id", "Name", "Description", "Picture", "Price", "Category id");
 
-echo "<table class='table table-striped'>
-<tr>
-<thead class='thead-dark'>
-<th scope='col'>Id</th>
-<th scope='col'>Name</th>
-<th scope='col'>Description</th>
-<th scope='col'>Picture</th>
-<th scope='col'>Price</th>
-<th scope='col'>Category Id</th>
-</thead>
-</tr>";
-echo "<tbody>";
-while($donnees = $reponse->fetch())
-{
-echo "<tr>";
-echo "<td><input value=$donnees[id]></td>";
-echo "<td><input value=$donnees[name]></td>";
-echo "<td><input value=$donnees[description]></td>";
-echo "<td><input value=$donnees[picture]></td>";
-echo "<td><input value=$donnees[price]></td>";
-echo "<td><input value=$donnees[category_id]></td>";
-echo "</tr>";
+if(isset($_POST['search_products'])) {
+    $search = strtolower($_POST['input_search_products']);
+    $sql = "SELECT * FROM products WHERE LOWER(CONCAT(id, name, description, picture, price)) LIKE '%$search%'";
+    $response = $bdd->prepare($sql);
+    $response->execute();
+    printTable($response, $arrayProducts, "product");
 }
-echo "</tbody>";
-echo "</table>";
+else {
+    $response = $bdd->prepare("SELECT * FROM products");
+    $response->execute();
+    printTable($response, $arrayProducts, "product");
+}
+
 ?>
 
 <h2> Add Categories </h2>   
@@ -286,27 +288,28 @@ echo "</table>";
                     <input type = "submit" name ="add_category" class="add_category btn btn-primary" value="Add Category"/> 
             </div>
         </form>
+        <form method="post">
+            <div class="container search">
+                <input class="form-control mr-sm-2" type="search" name = "input_search_categories" placeholder="Search Categories" aria-label="Search">
+                <button class="btn btn-primary" type="submit" name="search_users">Filter Categories</button>
+            </div>
+        </form>
 <?php 
-$reponse = $bdd->prepare("SELECT * FROM categories");
-$reponse->execute();
+$arrayCategories = array("Id", "Name", "Parent_id");
 
-echo "<table class='table table-striped'>
-<thead class='thead-dark'>
-<tr>
-<th scope='col'>Id</th>
-<th scope='col'>Name</th>
-<th scope='col'>Parent Id </th>
-</tr>";
-echo "</thead>";
-while($donnees = $reponse->fetch())
-{
-echo "<tr>";
-echo "<td><input value=$donnees[id]></td>";
-echo "<td><input value=$donnees[name]></td>";
-echo "<td><input value=$donnees[parent_id]></td>";
-echo "</tr>";
+if(isset($_POST['search_categories'])) {
+    $search = strtolower($_POST['input_search_categoriess']);
+    $sql = "SELECT * FROM categories WHERE LOWER(CONCAT(id, name, parent_category)) LIKE '%$search%'";
+    $response = $bdd->prepare($sql);
+    $response->execute();
+    printTable($response, $arrayCategories, "category");
 }
-echo "</table>";
+else {
+    $response = $bdd->prepare("SELECT * FROM categories");
+    $response->execute();
+    printTable($response, $arrayCategories, "category");
+}
+
 ?>
 
 </body>
