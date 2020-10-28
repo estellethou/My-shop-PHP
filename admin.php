@@ -157,7 +157,6 @@ function editProductIntoDb(){
     picture='" . $_POST['picture'] . "',
     category_id='" . $_POST['category_id'] . "',
     price='" . $_POST['price'] . "' WHERE id='" . $_POST['id'] . "';");
-    var_dump($response);
     $response->execute();
     $response = $bdd->prepare("SELECT * FROM products");
     $response->execute();
