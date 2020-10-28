@@ -75,7 +75,7 @@ class User {
     
     public function __construct($username, $password, $email, $admin){
         $this->username = $username;
-        $this->password = $password;
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
         $this->email = $email;
         $this->admin = $admin;
 
