@@ -5,11 +5,11 @@ if (!$_COOKIE['admin']) {
 
 class Product {
     const ERROR_LOG_FILE = "errors.log";
-    public $name;
-    public $description;
-    public $picture;
-    public $price;
-    public $category_id;
+    private $name;
+    private $description;
+    private $picture;
+    private $price;
+    private $category_id;
     
     public function __construct($name, $description, $picture, $price, $category_id){
         $this->name = $name;
@@ -17,15 +17,11 @@ class Product {
         $this->picture = $picture;
         $this->price = $price;
         $this->category_id = $category_id;
+        $this->insertProductIntoDb();
+    }
 
-        try {
-            $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop", 'root', 'root');
-            #echo "Connection to DB successful" . PHP_EOL;
-        } 
-        catch (PDOException $e) {
-            echo 'PDO ERROR: ' . $e->getMessage() . " storage in " . ERROR_LOG_FILE . ". Error connection to DB" . PHP_EOL;
-            file_put_contents(ERROR_LOG_FILE, $e, FILE_APPEND);
-        }
+    public function insertProductIntoDb(){
+        $bdd = connectToDb();
 
         $reponse = $bdd->prepare("INSERT INTO products(name, description, picture, price, category_id) 
                                   VALUES (?, ?, ?, ?, ?);");
@@ -41,52 +37,43 @@ class Product {
 
 class Category {
     const ERROR_LOG_FILE = "errors.log";
-    public $name_category;
-    public $parent_id;
+    private $name_category;
+    private $parent_id;
     
     public function __construct($name_category, $parent_id){
         $this->name_category = $name_category;
         $this->parent_id = $parent_id;
+        $this->insertCategoryIntoDb();
+    }
 
-        try {
-            $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop", 'root', 'root');
-            #echo "Connection to DB successful" . PHP_EOL;
-        } 
-        catch (PDOException $e) {
-            echo 'PDO ERROR: ' . $e->getMessage() . " storage in " . ERROR_LOG_FILE . ". Error connection to DB" . PHP_EOL;
-            file_put_contents(ERROR_LOG_FILE, $e, FILE_APPEND);
-        }
+    public function insertCategoryIntoDb(){
+        $bdd = connectToDb();
 
         $reponse = $bdd->prepare("INSERT INTO categories(name, parent_id) 
                                   VALUES (?, ?);");
         $reponse->bindParam(1, $this->name_category, PDO::PARAM_STR);
         $reponse->bindParam(2, $this->parent_id, PDO::PARAM_INT);
         $reponse->execute();
-        #echo "Category created" . PHP_EOL;
-    }
+    } 
 } 
 
 class User {
     const ERROR_LOG_FILE = "errors.log";
-    public $username;
-    public $password;
-    public $email;
-    public $admin;
+    private $username;
+    private $password;
+    private $email;
+    private $admin;
     
     public function __construct($username, $password, $email, $admin){
         $this->username = $username;
         $this->password = password_hash($password, PASSWORD_DEFAULT);
         $this->email = $email;
-        $this->admin = $admin;
+        $this->admin = $admin; 
+        $this->insertUserIntoDb();
+    }
 
-        try {
-            $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop", 'root', 'root');
-            #echo "Connection to DB successful" . PHP_EOL;
-        } 
-        catch (PDOException $e) {
-            echo 'PDO ERROR: ' . $e->getMessage() . " storage in " . ERROR_LOG_FILE . ". Error connection to DB" . PHP_EOL;
-            file_put_contents(ERROR_LOG_FILE, $e, FILE_APPEND);
-        }
+    public function insertUserIntoDb(){
+        $bdd = connectToDb();
 
         $reponse = $bdd->prepare("INSERT INTO users(username, password, email, admin, created_at) 
                                   VALUES (?, ?, ?, ?, NOW());");
@@ -95,19 +82,34 @@ class User {
         $reponse->bindParam(3, $this->email, PDO::PARAM_STR);
         $reponse->bindParam(4, $this->admin, PDO::PARAM_INT);
         $reponse->execute();
-        
-        #echo "User created" . PHP_EOL;
     }
 } 
 
-try {
-    $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop", 'root', 'root');
-    #echo "Connection to DB successful" . PHP_EOL;
-} 
-catch (PDOException $e) {
-    echo 'PDO ERROR: ' . $e->getMessage() . " storage in " . ERROR_LOG_FILE . ". Error connection to DB" . PHP_EOL;
-    file_put_contents(ERROR_LOG_FILE, $e, FILE_APPEND);
+function deleteUserIntoDb(){
+    if (isset($_POST['delete'])){
+        $bdd = connectToDb();
+        $reponse = $bdd->prepare("DELETE FROM users WHERE username='" . $_POST['username'] . "' AND email= '" . $_POST['email'] . "';");
+        $reponse->execute();
+        $reponse = $bdd->prepare("SELECT * FROM users");
+        $reponse->execute();
+        echo "<meta http-equiv='refresh' content='0'>";
+    }
 }
+
+function connectToDb(){
+    try {
+        $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop", 'root', 'root');
+        return($bdd);
+        #echo "Connection to DB successful" . PHP_EOL;
+    } 
+    catch (PDOException $e) {
+        echo 'PDO ERROR: ' . $e->getMessage() . " storage in " . ERROR_LOG_FILE . ". Error connection to DB" . PHP_EOL;
+        file_put_contents(ERROR_LOG_FILE, $e, FILE_APPEND);
+    }
+}
+
+$bdd = connectToDb();
+
 
 if (isset($_POST['add_user']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email']) && isset($_POST['admin'])){
     new User($_POST['username'], $_POST['password'], $_POST['email'], $_POST['admin']);    
@@ -120,6 +122,7 @@ if (isset($_POST['add_product']) && !empty($_POST['name']) && !empty($_POST['des
 if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($_POST['parent_id'])) {
     new Category($_POST['name_category'], $_POST['parent_id']);
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -167,11 +170,11 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
                 <input type="submit" value="Add User" name="add_user" class="btn btn-primary add_user"/>
             </div>
         </form>
-        <div class="container search">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search Users" aria-label="Search">
             <button class="btn btn-primary" type="submit">Search</button>
         </div>
 <?php 
+            <input class="form-control mr-sm-2" type="search" placeholder="Search Users" aria-label="Search">
+        <div class="container search">
 $reponse = $bdd->prepare("SELECT * FROM users");
 $reponse->execute();
 
@@ -190,19 +193,24 @@ echo "<table class='table table-striped'>
 echo "<tbody>";
 while($donnees = $reponse->fetch())
 {
+echo "<form method='post'>";
 echo "<tr>";
-echo "<td><input value=$donnees[id]></td>";
-echo "<td><input value=$donnees[username]></td>";
-echo "<td><input value=$donnees[password]></td>";
-echo "<td><input value=$donnees[email]></td>";
-echo "<td><input value=$donnees[admin]></td>";
-echo "<td><input value=$donnees[created_at]></td>";
-echo "<td> <input type = 'submit' name ='edit' class='add_category btn btn-primary' value='Edit User'/> </td>";
+echo "<td><input name='id' value=$donnees[id]></td>";
+echo "<td><input name='username' value=$donnees[username]></td>";
+echo "<td><input name='password' value=$donnees[password]></td>";
+echo "<td><input name='email' value=$donnees[email]></td>";
+echo "<td><input name='admin' value=$donnees[admin]></td>";
+echo "<td><input name='created_at' value=$donnees[created_at]></td>";
+echo "<td> <input type='submit' name ='delete' class='add_category btn btn-primary' value='Delete User'/> </td>";
 echo "</tr>";
+echo "</form> ";
 }
 echo "</tbody>";
 echo "</table>";
+deleteUserIntoDb();
+$reponse->closeCursor();
 ?>
+
 <h2> Add Products </h2>   
         <form method="post">
             <div class="form-group">
