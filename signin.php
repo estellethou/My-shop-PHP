@@ -1,5 +1,7 @@
 <?php
 const ERROR_LOG_FILE = 'PDO_Errors.log';
+const DB_HOST = "127.0.0.1";
+const DB_USERNAME = "root";
 const DB_PASSWORD = "root";
 const DB_NAME = "my_shop";
 
