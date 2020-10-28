@@ -21,7 +21,8 @@ function printTable ($response, $tableColumns, $objectType) {
         echo "<form method=post>";
         echo "<tr>";
         foreach ($tableColumns as $a) {
-            echo "<td><input value=" . $donnees[strtolower($a)] . " name = " . strtolower($a) ."></td>";
+            $value = $donnees[strtolower($a)];
+            echo "<td><input value='$value' name = " . strtolower($a) ."></td>";
         }  
         echo "<td> <input type = 'submit' name ='edit_$objectType' class='add_category btn btn-primary' value='Edit $objectType'/> </td>";
         echo "<td> <input type = 'submit' name ='delete_$objectType' class='add_category btn btn-danger' value='Delete $objectType'/> </td>";
