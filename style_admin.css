@@ -3,7 +3,18 @@ body {
     width:auto;
     margin: 20px 20px !important;
     font-family:'Nunito Sans', sans-serif;
+    background-color: #dfe4eaf6 ;
+}
 
+.tab-content {
+    display: none;
+    
+}
+.tab-content:target {
+    display: block;
+}
+.nav {
+    margin-bottom: 20px !important;
 }
 
 h1 {

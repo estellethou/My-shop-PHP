@@ -23,6 +23,7 @@ function printTable ($response, $tableColumns, $objectType) {
         foreach ($tableColumns as $a) {
             $value = $donnees[strtolower($a)];
             echo "<td><input value='$value' name = " . strtolower($a) ."></td>";
+
         }  
         echo "<td> <input type = 'submit' name ='edit_$objectType' class='add_category btn btn-primary' value='Edit $objectType'/> </td>";
         echo "<td> <input type = 'submit' name ='delete_$objectType' class='add_category btn btn-danger' value='Delete $objectType'/> </td>";
@@ -216,6 +217,12 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
 
 <body>
 <h1> Administration page </h1>
+<ul class="nav nav-tabs">
+    <li class="nav-item"><a class="nav-link" href="#tab1">Users</a></li>
+    <li class="nav-item"><a class="nav-link" href="#tab2">Products</a></li>
+    <li class="nav-item"><a class="nav-link" href="#tab3">Categories</a></li>
+</ul>
+<section id="tab1" class="tab-content">
     <h2> Add Users </h2>   
         <form method="post">
             <div class="form-group">
@@ -244,6 +251,7 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
                 <input type="submit" value="Add User" name="add_user" class="btn btn-primary add_user"/>
             </div>
         </form>
+    <h2>Users </h2>
         <form method="post">
             <div class="container search">
                 <input class="form-control mr-sm-2" type="search" name = "input_search_users" placeholder="Search Users" aria-label="Search">
@@ -272,7 +280,8 @@ if (isset($_POST['edit_user'])) {
     editUserIntoDb();
 }
 ?>
-
+</section>
+<section id="tab2" class="tab-content">
 <h2> Add Products </h2>   
         <form method="post">
             <div class="form-group">
@@ -300,14 +309,16 @@ if (isset($_POST['edit_user'])) {
                     <input type = "submit" name ="add_product" class="add_product btn btn-primary" value="Add Product" /> 
             </div>
         </form>
+    <h2>Products</h2>
         <form method="post">
             <div class="container search">
                 <input class="form-control mr-sm-2" type="search" name = "input_search_products" placeholder="Search Products" aria-label="Search">
                 <button class="btn btn-primary" type="submit" name="search_products">Filter Products</button>
             </div>
         </form>
+
 <?php 
-$arrayProducts = array("Id", "Name", "Description", "Picture", "Price", "Category id");
+$arrayProducts = array("Id", "Name", "Description", "Picture", "Price", "Category_id");
 
 if(isset($_POST['search_products'])) {
     $search = strtolower($_POST['input_search_products']);
@@ -329,7 +340,8 @@ if (isset($_POST['edit_product'])){
     editProductIntoDb();
 }
 ?>
-
+</section>
+<section id="tab3" class="tab-content">
 <h2> Add Categories </h2>   
         <form method="post">
             <div class="form-group">
@@ -344,6 +356,7 @@ if (isset($_POST['edit_product'])){
                     <input type = "submit" name ="add_category" class="add_category btn btn-primary" value="Add Category"/> 
             </div>
         </form>
+    <h2>Categories</h2>
         <form method="post">
             <div class="container search">
                 <input class="form-control mr-sm-2" type="search" name = "input_search_categories" placeholder="Search Categories" aria-label="Search">
@@ -369,6 +382,6 @@ if (isset($_POST['delete_category'])) {
     deleteCategoryIntoDb();
 }
 ?>
-
+</section>
 </body>
 </html>
