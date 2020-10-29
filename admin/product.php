@@ -40,18 +40,38 @@ function deleteProductIntoDb(){
 }
 
 function editProductIntoDb(){
-    if (isset($_POST['name']) && isset($_POST['description']) && isset($_FILES['new_picture']) && isset($_POST['price']) && isset($_POST['category_id'])) {
+    if($_FILES['new_picture']['name']==""){
+        $a = $_POST['picture'];
+    }
+    else {
+        $a = $_FILES['new_picture']['name'];
+    }
+    if (($_POST['name']) == "" || $_POST['description'] == "" || $_POST['picture'] == "" || $_POST['price'] == "" || $_POST['category_id'] == ""){
+        $bdd = connectToDb();
+        $response = $bdd->prepare("SELECT * FROM products;"); 
+        $response->execute();
+    }
+    else {
         $bdd = connectToDb();
         $response = $bdd->prepare("UPDATE products 
-        SET name='" . $_POST['name'] . "', 
-        description='" . $_POST['description'] . "',
-        picture='" . $_FILES['new_picture']['name'] . "',
+        SET description='" . $_POST['description'] . "',
+        picture='" . $a . "',
         category_id='" . $_POST['category_id'] . "',
         price='" . $_POST['price'] . "' WHERE id='" . $_POST['id'] . "';");
         $response->execute();
-        $response = $bdd->prepare("SELECT * FROM products");
-        $response->execute();
         echo "<meta http-equiv='refresh' content='0'>";
-    }
+        $response = $bdd->prepare("SELECT name FROM products WHERE name='" . $_POST['name'] . "';");
+        $response->execute();
+        $donnee = $response->fetch();
+        if ($donnee['name'] == null) {
+            $response = $bdd->prepare("UPDATE products 
+            SET name='" . $_POST['name'] . "' 
+            WHERE id='" . $_POST['id'] . "';");
+            $response->execute();
+            $response = $bdd->prepare("SELECT * FROM products");
+            $response->execute();
+            echo "<meta http-equiv='refresh' content='0'>";
+        }
+    }  
 }
 ?>
