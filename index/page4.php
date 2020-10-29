@@ -1,7 +1,6 @@
 <?php
-include_once('function_index.php')
+include_once('function_index.php');
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,9 +9,9 @@ include_once('function_index.php')
     <meta content="width=device-width, initial-scale=1" name="viewport" />
     <meta name="author" content="All Stars" />
     <meta name="description"
-        content="All Stars my shop is a template of a concept store using HTML, CSS and MySQL only. You can display products and categories, 
-        sign-in and sign-up, save users in database, use an admin page to manage your database. Here is an example of a concept store displaying 
-        all fashion and timeless shoes ever created since 1920. " />
+        content="All Stars my shop is a template of a concept store using HTML, CSS, PHP and MySQL only. You can display products and categories, 
+        sign-in and sign-up, save users in database, use an admin page to manage your database. Here is an example of a concept store displaying Chrismas 
+        present for people who don't have a lot of money but a great sense of humor" />
     <link href="index.css" rel="stylesheet" />
     <link href="mobile.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
@@ -29,11 +28,10 @@ include_once('function_index.php')
     if($_COOKIE['admin']) {
     ?>
     <style type="text/css">#adminTools {
-        display: flex;
-    <?php } ?></style>
-    
-    
-}
+        display: flex
+    }
+    <?php } ?></style>   
+
     <div class="wrapper_menu">
         <div class="left">
             <nav class="menu navbar navbar-expand-lg navbar-light bg-light">
@@ -49,9 +47,8 @@ include_once('function_index.php')
         <div class="right">
             <nav class="menu navbar navbar-expand-lg navbar-light bg-light">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a href="#" class="nav-link cart"></a></li>
                     <li class="nav-item"><a href="../admin/admin.php" class="nav-link" id="adminTools">ADMIN TOOLS</a></li>
-                    <li class="nav-item"><a href="../authentication/logout.php" class="nav-link">SIGN OUT</a></li>
+                    <li class="nav-item"><a href="../authentication/logout.php" class="sign-out">SIGN OUT</a></li>
                     <img src="../images/constant/burger.png" class="menu_mobile" />
                 </ul>
             </nav>
@@ -59,19 +56,28 @@ include_once('function_index.php')
     </div>
 
     <!-- SEARCH BAR -->
-    
-    <div class="grid-search">
-        <div class="grid-search1">
-                <div class="search">
-                    <input type="text" id="search" class="search_bar" placeholder="Search bar"></input>
-                </div> 
+    <form method="post">
+        <div class="grid-search">
+            <div class="grid-search1">
+                    <div class="search">
+                        <input type="text" id="search" class="search_bar" placeholder="Search bar" name="search_input"></input>
+                    </div> 
+                    <div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
+            </div>
         </div>
-    </div>
+    </form>
 
     <!-- BODY -->
+<?php
+    if(isset($_POST['search_input'])) {
+        filterItems();
+    }
+?>
     <div class="big-container">
         <div class="grid-container">
-            <div class="grid-item1">
+            <div class="grid-item1" id=<?php echo(includeIdFromDb(16));?>>
             <img src="<?php echo(includeImgFromDb(16));?>" class="image" alt="Coombes">
                 <div class="description">
                     <div class="info-container">
@@ -88,7 +94,7 @@ include_once('function_index.php')
 
                     <div class="buy">
                         <div class="price">
-                            <p class="line1-text">$<?php includePriceFromDb(1);?></p>
+                            <p class="line1-text">$<?php includePriceFromDb(16);?></p>
                         </div>
                         <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
@@ -201,7 +207,7 @@ include_once('function_index.php')
                 <div class="description">
                     <div class="info-container">
                         <div class="info">
-                            <p><strong><?php echo(includeNameFromDb(21));?></strong></p>
+                            <p class="line1-text"><strong><?php echo(includeNameFromDb(21));?></strong></p>
                             <p class="info-text">S<?php includeDescriptionFromDb(21);?></p>
                         </div>
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
@@ -226,7 +232,7 @@ include_once('function_index.php')
                 <div class="description">
                     <div class="info-container">
                         <div class="info">
-                            <p><strong><?php echo(includeNameFromDb(22));?></strong></p>
+                            <p class="line1-text"><strong><?php echo(includeNameFromDb(22));?></strong></p>
                             <p class="info-text"><?php includeDescriptionFromDb(22);?></p>
                         </div>
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
@@ -251,7 +257,7 @@ include_once('function_index.php')
                 <div class="description">
                     <div class="info-container">
                         <div class="info">
-                            <p><strong><?php echo(includeNameFromDb(23));?></strong></p>
+                            <p class="line1-text"><strong><?php echo(includeNameFromDb(23));?></strong></p>
                             <p class="info-text"><?php includeDescriptionFromDb(23);?></p>
                         </div>
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">

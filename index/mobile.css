@@ -1,4 +1,9 @@
 @media only screen and (max-width: 1024px) {
+    .description {
+        width: 60%;
+        line-height: 50%;
+    }
+
     .grid-container {
         display: grid;
         margin-left: auto;
@@ -10,30 +15,24 @@
         width: 80%;
     }
 
-    .image{
-        width: 80%;
-        height: 80%;
-    }
-
     .grid-item7, .grid-item8 {
         display: none;
     } 
 
-    .pagination{
-        display: block;
-        justify-content: center;
-        margin-top: 15rem;
-    }
-
-    .description {
-        width: 60%;
-        line-height: 50%;
+    .image{
+        width: 80%;
+        height: 80%;
     }
 
     .navbar-light .navbar-nav .nav-link {
         display: none;
     }
 
+    .pagination{
+        display: block;
+        justify-content: center;
+        margin-top: 15rem;
+    }
 }
 
 
