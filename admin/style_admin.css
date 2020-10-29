@@ -35,10 +35,50 @@ td {
     max-width: 250px;
 }
 
+.form-control-file {
+    margin-top: 4px;
+}
+
 .form-group {
     width: 200px; 
     margin-right: 20px;
     padding-left: 0px !important;
+}
+
+.alert {
+    display: none;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    top: 10px;
+   
+    animation: cssAnimation 6s ease-in forwards;
+    /* -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards; */
+    
+}
+
+.alert-danger{
+    width: 80%;
+    text-align: center;
+    top: 20px;
+   
+    animation: none;
+    /* -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards; */
+    
+}
+
+@keyframes cssAnimation {
+    0% {
+        opacity: 0;
+    }
+    20%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
 
 .form-group #picture{

@@ -2,6 +2,7 @@
 include_once('category.php');
 include_once('product.php');
 include_once('user.php');
+include_once('upload_image.php');
 
 if (!$_COOKIE['admin']) {
     header("Location: ../index/index.php");
@@ -58,8 +59,14 @@ if (isset($_POST['add_user']) && isset($_POST['username']) && isset($_POST['pass
     new User($_POST['username'], $_POST['password'], $_POST['email'], $_POST['admin']);    
 }
 
-if (isset($_POST['add_product']) && isset($_POST['name']) && isset($_POST['description']) && isset($_POST['picture']) && isset($_POST['price']) && isset($_POST['category_id'])) {
-    new Product($_POST['name'], $_POST['description'], $_POST['picture'], $_POST['price'], $_POST['category_id']);
+if (isset($_POST['add_product']) && isset($_POST['name']) && isset($_POST['description']) && isset($_FILES['picture']) && isset($_POST['price']) && isset($_POST['category_id'])) {
+    new Product($_POST['name'], $_POST['description'], $_FILES['picture']['name'], $_POST['price'], $_POST['category_id']);
+    $uploadResult = upload_image($_FILES['picture']);
+    ?>
+    <style type="text/css">#uploadSuccess {
+        display: block;
+    }</style>
+<?php
 }
 
 if (isset($_POST['add_category']) && isset($_POST['name_category'])) {
@@ -77,7 +84,7 @@ if (isset($_POST['add_category']) && isset($_POST['name_category'])) {
     <meta name="description"
         content="All stars is a concept store of furnitures for your appartement. You will find amazing design furnitures for your living room, your kitchen, your batchroom and your bedroom." />
     <link href="style_admin.css" rel="stylesheet" />
-    <link href="all.css" rel="stylesheet">
+    <link href="../all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap" rel="stylesheet">
@@ -85,10 +92,12 @@ if (isset($_POST['add_category']) && isset($_POST['name_category'])) {
 </head>
 
 <body>
+<span class="alert alert-success" role="alert" id="uploadSuccess"> <?php echo $uploadResult; ?> </span>
+<span class="alert alert-danger" role="alert" id="uploadFailure"> <?php echo $uploadResult; ?> </span>
 <div class= "navbar" id="header">
     <a class="btn btn-primary my-2 my-lg-0" href="../index/index.php"><i class="far fa-arrow-left"></i> Back to site</a>
     <h1 class="mx-auto"> Administration tools </h1>
-    <a class="btn btn-primary my-2 my-lr-0" href="../authentication/logout.php">Logout</a>
+    <a class="btn btn-primary my-2 my-lr-0" href="../authentication/logout.php"><i class="far fa-sign-out-alt"></i> Logout</a>
 </div>
 <ul class="nav nav-tabs">
     <li class="nav-item"><a class="nav-link" href="#tab1">Users</a></li>
@@ -121,14 +130,14 @@ if (isset($_POST['add_category']) && isset($_POST['name_category'])) {
                 </select>
             </div>
             <div class="form-group align-self-end">
-                <input type="submit" value="Add User" name="add_user" class="btn btn-primary add_user"/>
+                <button type="submit" value="Add User" name="add_user" class="btn btn-primary add_user"><i class="far fa-plus-circle"></i> Add User</button>
             </div>
         </form>
     <h2>Users </h2>
         <form method="post">
             <div class="container search">
                 <input class="form-control mr-sm-2" type="search" name = "input_search_users" placeholder="Search Users" aria-label="Search">
-                <button class="btn btn-primary" type="submit" name="search_users">Filter Users</button>
+                <button class="btn btn-primary" type="submit" name="search_users"><i class="far fa-filter"></i> Filter Users</button>
             </div>
         </form>
 <?php 
@@ -156,7 +165,7 @@ if (isset($_POST['edit_user'])) {
 </section>
 <section id="tab2" class="tab-content">
 <h2> Add Products </h2>   
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             <div class="form-group">
                     <label for="username">Name: </label>
                     <input type="text" class="form-control" id="name" name="name" placeholder="name"> 
@@ -165,6 +174,7 @@ if (isset($_POST['edit_user'])) {
                     <label for="description">Description: </label>
                     <input type="test" class="form-control" id="description" name="description" placeholder="description">
             </div>
+            <!-- picture upload -->
             <div class="form-group">
                 <label for="picture">Picture: </label>
                 <input type="file" class="form-control-file " id="picture" name="picture">
@@ -179,14 +189,14 @@ if (isset($_POST['edit_user'])) {
                 <input type="number" class="form-control" id="category_id" name="category_id">
             </div>
             <div class="form-group align-self-end">
-                    <input type = "submit" name ="add_product" class="add_product btn btn-primary" value="Add Product" /> 
+                    <button type = "submit" name ="add_product" class="add_product btn btn-primary" value="Add Product" ><i class="far fa-plus-circle"></i> Add Product</button> 
             </div>
         </form>
     <h2>Products</h2>
         <form method="post">
             <div class="container search">
                 <input class="form-control mr-sm-2" type="search" name = "input_search_products" placeholder="Search Products" aria-label="Search">
-                <button class="btn btn-primary" type="submit" name="search_products">Filter Products</button>
+                <button class="btn btn-primary" type="submit" name="search_products"><i class="far fa-filter"></i> Filter Products</button>
             </div>
         </form>
 
@@ -226,14 +236,14 @@ if (isset($_POST['edit_product'])){
                     <input type="number" class="form-control" id="parent_id" name="parent_id" placeholder="parent_id"> 
             </div>
             <div class="form-group align-self-end">
-                    <input type = "submit" name ="add_category" class="add_category btn btn-primary" value="Add Category"/> 
+                    <button type = "submit" name ="add_category" class="add_category btn btn-primary" value="Add Category"> <i class="far fa-plus-circle"></i> Add Category</button>
             </div>
         </form>
     <h2>Categories</h2>
         <form method="post">
             <div class="container search">
                 <input class="form-control mr-sm-2" type="search" name = "input_search_categories" placeholder="Search Categories" aria-label="Search">
-                <button class="btn btn-primary" type="submit" name="search_users">Filter Categories</button>
+                <button class="btn btn-primary" type="submit" name="search_users"><i class="far fa-filter"></i> Filter Categories</button>
             </div>
         </form>
 <?php 
