@@ -1,3 +1,28 @@
+<?php
+function connectToDb(){
+    try {
+        $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop", 'root', 'root');
+        $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop" . ';charset=utf8', "root", "root");
+        return($bdd);
+        //echo "Connection to DB successful" . PHP_EOL;
+    } 
+    catch (PDOException $e) {
+        echo 'PDO ERROR: ' . $e->getMessage() . " storage in " . ERROR_LOG_FILE . ". Error connection to DB" . PHP_EOL;
+        file_put_contents(ERROR_LOG_FILE, $e, FILE_APPEND);
+    }
+}
+
+function includeImgFromDb($id){
+    $bdd= connectToDb();
+    $response = $bdd->prepare("SELECT picture FROM products WHERE id ='" . $id . "';");
+    $response->execute();
+    $donnees = $response->fetch();
+    $picture_path = "../images/". $donnees['picture'];
+    return($picture_path);
+}
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,8 +35,9 @@
         all fashion and timeless shoes ever created since 1920. " />
     <link href="index.css" rel="stylesheet" />
     <link href="mobile.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap" rel="stylesheet">
+        <integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
     <title>All Stars my shop</title>
 </head>
 
@@ -21,7 +47,7 @@
         <div class="left">
             <nav class="menu navbar navbar-expand-lg navbar-light bg-light">
                 <ul class="navbar-nav mr-auto">
-                    <img src="images/constant/Logo.png" class="logo">
+                    <img src="images/star.png" class="logo">
                     <li class="nav-item disable"><a href="#" class="nav-link">HOME</a></li>
                     <li class="nav-item disable"><a href="#" class="nav-link">SHOP</a></li>
                     <li class="nav-item disable"><a href="#" class="nav-link">MAGAZINE</a></li>
@@ -44,20 +70,9 @@
     
     <div class="grid-search">
         <div class="grid-search1">
-                <div class="sub_search">
+                <div class="search">
                     <input type="text" id="search" class="search_bar" placeholder="Search bar"></input>
                 </div> 
-        </div>
-
-        <div class="grid-search2">
-            <div class="dropdown_search">
-                <ul class="dropdown">
-                    <li class="disable_best"><a href="#">Best match <img class="img_arrow2"
-                                src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Arrow-down.svg"
-                                alt="arrow down"></a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
 
@@ -65,42 +80,25 @@
     <div class="big-container">
         <div class="grid-container">
             <div class="grid-item1">
-                <div class=filter_section>
-                    <p class="filter"> FILTER BY </p>
-
-                    <ul id="myUL">
-                        <li class="filters-ticket"><a href="#">Best match <img class="img_arrow"
-                                    src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Arrow-down.svg"
-                                    alt="arrow down"></a>
-                        </li>
-                        <li class="filters-ticket"><a href="#">Filters <img class="img_arrow"
-                                    src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Arrow-down.svg"
-                                    alt="arrow down"></a>
-                        </li>
-                        <li class="collection-ticket"><a href="#">Collection <img class="img_arrow"
-                                    src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Arrow-down.svg"
-                                    alt="arrow down"></a>
-                        </li>
-                        <li class="color-ticket"><a href="#">Color <img class="img_arrow"
-                                    src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Arrow-down.svg"
-                                    alt="arrow down"></a>
-                        </li>
-                        <li class="category-ticket"><a href="#">Category <img class="img_arrow"
-                                    src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Arrow-down.svg"
-                                    alt="arrow down"></a>
-                        </li>
-                    </ul>
-
-                    <div class="slidecontainer">
-                        <label for="myRange" class="label_price">Price min</label>
-                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
-                        <p class="min_price">$0</p>
+            <img src="<?php echo(includeImgFromDb(2));?>" class="image" alt="Coombes">
+                <div class="description">
+                    <div class="info-container">
+                        <div class="info">
+                            <p class="line1-text" ><strong>Coombes</strong></p>
+                            <p class="info-text">LOUNGE</p>
+                        </div>
+                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="images/constant/Star.png" alt="Rating">
                     </div>
 
-                    <div class="slidecontainer2">
-                        <label for="myRange2" class="label_price">Price max</label>
-                        <input type="range" min="1" max="100" value="50" class="slider" id="myRange2">
-                        <p class="max_price">$10,000+</p>
+                    <div class="buy">
+                        <div class="price">
+                            <p class="line1-text">$2,600</p>
+                        </div>
+                        <img src="images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
                 </div>
             </div>

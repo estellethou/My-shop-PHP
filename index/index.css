@@ -15,7 +15,7 @@
 }
 
 * { /* or body */
-	font-family: 'avenir', 'roboto', arial, "arial black", verdana, sans-serif;
+    font-family:'Nunito Sans', sans-serif, arial, "arial black", verdana;
 }
 
 /* ----------------------------------------------- MENU (nav bar) ----------------------------------------*/
@@ -42,9 +42,9 @@ div.wrapper_menu {
 }
 
 img.logo {
-    height: 80px;
-    margin: 0 20px 0 0;
-    width: 80px;
+    height: 65px;
+    margin: 0 0 0 0;
+    width: 65px;
 }
 
 img.menu_mobile {
@@ -121,16 +121,12 @@ img.loupe  {
     grid-column: 4;
 } 
 
-.sub_search{
-    width: 90%;
+.search{
+    width: 100%;
 }
 
 
-.sub_search input#search {
-    background: url("images/constant/Algolia_logo.png");
-    background-position: bottom right;
-    background-repeat: no-repeat;
-    background-size: 25%;
+.search input#search {
     border: none;
     border-bottom: 2px solid black;
     font-size: 1.4rem;
