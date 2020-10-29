@@ -5,12 +5,12 @@ function upload_image($image) {
         mkdir("../images");
     }
     $target_dir = "../images/";
-    $target_file = $target_dir . basename($_FILES["picture"]["name"]);
+    $target_file = $target_dir . basename($image["name"]);
     $uploadOk = 1;
     $imageFileType = strtolower(pathinfo($target_file,PATHINFO_EXTENSION));
     // Check if image file is a actual image or fake image
     if(isset($_POST["submit"])) {
-        $check = getimagesize($_FILES["picture"]["tmp_name"]);
+        $check = getimagesize($image["tmp_name"]);
         if($check !== false) {
           echo "File is an image - " . $check["mime"] . ".";
           $uploadOk = 1;
@@ -43,7 +43,7 @@ function upload_image($image) {
       if ($uploadOk == 0) {
       // if everything is ok, try to upload file
       } else {
-        if (move_uploaded_file($_FILES["picture"]["tmp_name"], $target_file)) {
+        if (move_uploaded_file($image["tmp_name"], $target_file)) {
             $uploadResult = "Product was created successfully.";
         } else {
         }

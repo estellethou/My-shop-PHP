@@ -40,12 +40,12 @@ function deleteProductIntoDb(){
 }
 
 function editProductIntoDb(){
-    if (isset($_POST['name']) && isset($_POST['description']) && isset($_POST['picture']) && isset($_POST['price']) && isset($_POST['category_id'])) {
+    if (isset($_POST['name']) && isset($_POST['description']) && isset($_FILES['new_picture']) && isset($_POST['price']) && isset($_POST['category_id'])) {
         $bdd = connectToDb();
         $response = $bdd->prepare("UPDATE products 
         SET name='" . $_POST['name'] . "', 
         description='" . $_POST['description'] . "',
-        picture='" . $_POST['picture'] . "',
+        picture='" . $_FILES['new_picture']['name'] . "',
         category_id='" . $_POST['category_id'] . "',
         price='" . $_POST['price'] . "' WHERE id='" . $_POST['id'] . "';");
         $response->execute();
