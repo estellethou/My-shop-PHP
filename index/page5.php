@@ -1,54 +1,6 @@
 <?php
-function connectToDb(){
-    try {
-        $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop", 'root', 'root');
-        $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop" . ';charset=utf8', "root", "root");
-        return($bdd);
-        //echo "Connection to DB successful" . PHP_EOL;
-    } 
-    catch (PDOException $e) {
-        echo 'PDO ERROR: ' . $e->getMessage() . " storage in " . ERROR_LOG_FILE . ". Error connection to DB" . PHP_EOL;
-        file_put_contents(ERROR_LOG_FILE, $e, FILE_APPEND);
-    }
-}
-
-function includeImgFromDb($id){
-    $bdd= connectToDb();
-    $response = $bdd->prepare("SELECT picture FROM products WHERE id ='" . $id . "';");
-    $response->execute();
-    $donnees = $response->fetch();
-    $picture_path = "../images/". $donnees['picture'];
-    return($picture_path);
-}
-
-function includeNameFromDb($id){
-    $bdd= connectToDb();
-    $response = $bdd->prepare("SELECT name FROM products WHERE id ='" . $id . "';");
-    $response->execute();
-    $donnees = $response->fetch();
-    $productName = $donnees['name'];
-    return($productName);
-}
-
-function includeDescriptionFromDb($id){
-    $bdd= connectToDb();
-    $response = $bdd->prepare("SELECT description FROM products WHERE id ='" . $id . "';");
-    $response->execute();
-    $donnees = $response->fetch();
-    $productDesc = $donnees['description'];
-    print($donnees['description']);
-}
-
-function includePriceFromDb($id){
-    $bdd= connectToDb();
-    $response = $bdd->prepare("SELECT price FROM products WHERE id ='" . $id . "';");
-    $response->execute();
-    $donnees = $response->fetch();
-    print($donnees['price']);
-}
-
+include_once('function_index.php')
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -322,16 +274,12 @@ function includePriceFromDb($id){
     <!-- PAGINATION -->
     <footer>
         <div class="pagination">
-            <a class="p1 active" href="#">1</a>
+            <a class="p1" href="index.php">1</a>
             <a class="p2" href="page2.php">2</a>
             <a class="p3" href="page3.php">3</a>
             <a class="p4" href="page4.php">4</a>
-            <a class="p5" href="page5.php">5</a>
+            <a class="p5 active" href="page5.php">5</a>
             <a class="p6" href="page6.php">6</a>
-            <a class="p7" href="page7.php">7</a>
-            <a class="p8" href="page8.php">8</a>
-            <a class="p9" href="page9.php">9</a>
-            <a class="p10" href="page10.php">10</a>
             <a id="page_arrow" href="#">&gt;</a>
         </div>
     </footer>
