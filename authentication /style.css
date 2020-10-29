@@ -1,0 +1,99 @@
+body {
+    max-width: 500px;
+    margin:auto;
+    font-family:'Nunito Sans', sans-serif;
+}
+
+form {
+    margin-top: 30%;
+}
+
+label {
+    font-weight: 600;
+}
+
+.form-group {
+    margin: auto;
+}
+
+.form-group:last-child {
+    margin: 20px 0;
+}
+
+.form-group a{
+    margin: auto 30px;
+}
+
+h2 {
+    text-align: center;
+    margin-bottom: 20px;;
+}
+
+*, ::after, ::before {
+    box-sizing: content-box;
+}
+
+.error {
+    color: #ff4757;
+}
+
+.btn-primary {
+    position: relative;
+    left: 3%;
+}
+
+.alert {
+    display: none;
+    margin: auto;
+    width: 50%;
+    text-align: center;
+    top: 20px;
+   
+    animation: cssAnimation 6s ease-in forwards;
+    /* -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards; */
+    
+}
+
+.alert-danger{
+    width: 80%;
+    text-align: center;
+    top: 20px;
+   
+    animation: none;
+    /* -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards; */
+    
+}
+
+@keyframes cssAnimation {
+    0% {
+        opacity: 0;
+    }
+    20%{
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+
+@media (min-width: 576px) {
+    .col-sm-2 {
+        flex: 0 0 50%;
+        max-width: 50%;
+    }
+    .col-sm-10 {
+        max-width: 100%;
+    }
+}
+
+.row {
+    margin-left: 0px;
+}
+
+
+
+/* modal       */
+

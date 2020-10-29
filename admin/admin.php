@@ -62,7 +62,7 @@ if (isset($_POST['add_product']) && !empty($_POST['name']) && !empty($_POST['des
     new Product($_POST['name'], $_POST['description'], $_POST['picture'], $_POST['price'], $_POST['category_id']);
 }
 
-if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($_POST['parent_id'])) {
+if (isset($_POST['add_category']) && !empty($_POST['name_category'])) {
     new Category($_POST['name_category'], $_POST['parent_id']);
 }
 
@@ -84,7 +84,7 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category']) && !empty($
 </head>
 
 <body>
-<h1> Administration page </h1>
+<h1> Administration tools </h1>
 <ul class="nav nav-tabs">
     <li class="nav-item"><a class="nav-link" href="#tab1">Users</a></li>
     <li class="nav-item"><a class="nav-link" href="#tab2">Products</a></li>
@@ -190,7 +190,7 @@ $arrayProducts = array("Id", "Name", "Description", "Picture", "Price", "Categor
 
 if(isset($_POST['search_products'])) {
     $search = strtolower($_POST['input_search_products']);
-    $sql = "SELECT * FROM users WHERE LOWER(CONCAT(id, name, description, picture, price, category_id)) LIKE '%$search%'";
+    $sql = "SELECT * FROM products WHERE LOWER(CONCAT(id, name, description, picture, price, category_id)) LIKE '%$search%'";
     $response = $bdd->prepare($sql);
     $response->execute();
     printTable($response, $arrayProducts, "product");
@@ -234,9 +234,9 @@ if (isset($_POST['edit_product'])){
 <?php 
 $arrayCategories = array("Id", "Name", "Parent_id");
 
-if(isset($_POST['search_categories'])) {
-    $search = strtolower($_POST['input_search_categoriess']);
-    $sql = "SELECT * FROM categories WHERE LOWER(CONCAT(id, name, parent_category)) LIKE '%$search%'";
+if(isset($_POST['input_search_categories'])) {
+    $search = strtolower($_POST['input_search_categories']);
+    $sql = "SELECT * FROM categories WHERE LOWER(CONCAT(id, name, parent_id)) LIKE '%$search%'";
     $response = $bdd->prepare($sql);
     $response->execute();
     printTable($response, $arrayCategories, "category");
