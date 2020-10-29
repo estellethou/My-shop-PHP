@@ -41,17 +41,33 @@ function deleteUserIntoDb(){
 }
 
 function editUserIntoDb(){
-    if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['admin'])){
+    if (($_POST['username']) == "" || $_POST['email'] == "" || $_POST['password'] == "" || $_POST['admin'] == ""){
         $bdd = connectToDb();
-        $response = $bdd->prepare("UPDATE users 
-        SET username='" . $_POST['username'] . "', 
-        password='" . $_POST['password'] . "',
-        email='" . $_POST['email'] . "',
-        admin='" . $_POST['admin'] . "' WHERE id='" . $_POST['id'] . "';");
+        $response = $bdd->prepare("SELECT * FROM users;"); 
         $response->execute();
-        $response = $bdd->prepare("SELECT * FROM users");
-        $response->execute();
-        echo "<meta http-equiv='refresh' content='0'>";
     }
+    elseif ($_POST['admin'] != 0 && $_POST['admin'] != 1 ) {
+        echo "Choose 1 to give admin access, 0 otherwise. " . PHP_EOL;
+    }
+    else {
+        $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
+            $bdd = connectToDb();
+            $response = $bdd->prepare("SELECT email FROM users WHERE email='" . $_POST['email'] . "';"); 
+            $response->execute();
+            if ($response->num_rows == 0) {
+                $bdd = connectToDb();
+                $response = $bdd->prepare("UPDATE users 
+                SET username='" . $_POST['username'] . "', 
+                password='" . $hash . "',
+                email='" . $_POST['email'] . "',
+                admin='" . $_POST['admin'] . "' WHERE id='" . $_POST['id'] . "';");
+                $response->execute();
+                $response = $bdd->prepare("SELECT * FROM users");
+                $response->execute();
+                echo "<meta http-equiv='refresh' content='0'>";
+            }
+        } 
+    }      
 }
 ?>

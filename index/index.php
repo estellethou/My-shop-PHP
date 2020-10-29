@@ -47,7 +47,7 @@ function includeImgFromDb($id){
         <div class="left">
             <nav class="menu navbar navbar-expand-lg navbar-light bg-light">
                 <ul class="navbar-nav mr-auto">
-                    <img src="images/star.png" class="logo">
+                    <img src="../images/star.png" class="logo">
                     <li class="nav-item disable"><a href="#" class="nav-link">HOME</a></li>
                     <li class="nav-item disable"><a href="#" class="nav-link">SHOP</a></li>
                     <li class="nav-item disable"><a href="#" class="nav-link">MAGAZINE</a></li>
@@ -60,7 +60,7 @@ function includeImgFromDb($id){
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a href="#" class="nav-link cart"></a></li>
                     <li class="nav-item"><a href="../authentication/logout.php" class="nav-link">SIGN OUT</a></li>
-                    <img src="images/constant/burger.png" class="menu_mobile" />
+                    <img src="../images/constant/burger.png" class="menu_mobile" />
                 </ul>
             </nav>
         </div>
@@ -87,24 +87,24 @@ function includeImgFromDb($id){
                             <p class="line1-text" ><strong>Coombes</strong></p>
                             <p class="info-text">LOUNGE</p>
                         </div>
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star.png" alt="Rating">
                     </div>
 
                     <div class="buy">
                         <div class="price">
                             <p class="line1-text">$2,600</p>
                         </div>
-                        <img src="images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
+                        <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
                 </div>
             </div>
 
             <div class="grid-item2">
-                <img src="images/furniture_p1/test1.jpg" class="image" alt="Coombes">
+                <img src="../images/furniture_p1/test1.jpg" class="image" alt="Coombes">
 
                 <div class="description">
                     <div class="info-container">
@@ -112,24 +112,24 @@ function includeImgFromDb($id){
                             <p class="line1-text" ><strong>Coombes</strong></p>
                             <p class="info-text">LOUNGE</p>
                         </div>
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star.png" alt="Rating">
                     </div>
 
                     <div class="buy">
                         <div class="price">
                             <p class="line1-text">$2,600</p>
                         </div>
-                        <img src="images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
+                        <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
                 </div>
             </div>
 
             <div class="grid-item3">
-                <img src="images/furniture_p1/test2.jpg" class="image" alt="Keeves Set">
+                <img src="../images/furniture_p1/test2.jpg" class="image" alt="Keeves Set">
 
                 <div class="description">
                     <div class="info-container">
@@ -137,24 +137,24 @@ function includeImgFromDb($id){
                             <p class="line1-text" ><strong>Keeve Set</strong></p>
                             <p class="info-text">TABLE & CHAIRS</p>
                         </div>
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star.png" alt="Rating">
                     </div>
 
                     <div class="buy">
                         <div class="price">
                             <p class="line1-text">$590</p>
                         </div>
-                        <img src="images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
+                        <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
                 </div>
             </div>
 
             <div class="grid-item4">
-                <img src="images/furniture_p1/test3.jpg" class="image" alt="Nillè">
+                <img src="../images/furniture_p1/test3.jpg" class="image" alt="Nillè">
 
                 <div class="description">
                     <div class="info-container">
@@ -162,24 +162,24 @@ function includeImgFromDb($id){
                             <p class="line1-text"><strong>Nillè</strong></p>
                             <p class="info-text">ARMCHAIR</p>
                         </div>
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star.png" alt="Rating">
                     </div>
 
                     <div class="buy">
                         <div class="price">
                             <p class="line1-text">$950</p>
                         </div>
-                        <img src="images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
+                        <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
                 </div>
             </div>
 
             <div class="grid-item5">
-                <img src="images/furniture_p1/test4.jpg" class="image" alt="Blanko">
+                <img src="../images/furniture_p1/test4.jpg" class="image" alt="Blanko">
 
                 <div class="description">
                     <div class="info-container">
@@ -187,24 +187,24 @@ function includeImgFromDb($id){
                             <p class="line1-text"><strong>Blanko</strong></p>
                             <p class="info-text">SIDE TABLE</p>
                         </div>
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star.png" alt="Rating">
                     </div>
 
                     <div class="buy">
                         <div class="price">
                             <p>$90</p>
                         </div>
-                        <img src="images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
+                        <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
                 </div>
             </div>
 
             <div class="grid-item6">
-                <img src="images/furniture_p1/test5.jpg" class="image" alt="Momo">
+                <img src="../images/furniture_p1/test5.jpg" class="image" alt="Momo">
 
                 <div class="description">
                     <div class="info-container">
@@ -212,24 +212,24 @@ function includeImgFromDb($id){
                             <p><strong>Momo</strong></p>
                             <p class="info-text">SHELVES</p>
                         </div>
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star.png" alt="Rating">
                     </div>
 
                     <div class="buy">
                         <div class="price">
                             <p>$890</p>
                         </div>
-                        <img src="images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
+                        <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
                 </div>
             </div>
 
             <div class="grid-item7">
-                <img src="images/furniture_p1/test6.jpg" class="image" alt="Penemillè">
+                <img src="../images/furniture_p1/test6.jpg" class="image" alt="Penemillè">
 
                 <div class="description">
                     <div class="info-container">
@@ -237,24 +237,24 @@ function includeImgFromDb($id){
                             <p><strong>Penemillè</strong></p>
                             <p class="info-text">CHAIR</p>
                         </div>
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star.png" alt="Rating">
                     </div>
 
                     <div class="buy">
                         <div class="price">
                             <p>$120</p>
                         </div>
-                        <img src="images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
+                        <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
                 </div>
             </div>
 
             <div class="grid-item8">
-                <img src="images/furniture_p1/test7.jpg" class="image" alt="Kappu">
+                <img src="../images/furniture_p1/test7.jpg" class="image" alt="Kappu">
 
                 <div class="description">
                     <div class="info-container">
@@ -262,18 +262,18 @@ function includeImgFromDb($id){
                             <p><strong>Kappu</strong></p>
                             <p class="info-text">SHELVES</p>
                         </div>
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star - On.png" alt="Rating">
-                        <img class="start" src="images/constant/Star.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star - On.png" alt="Rating">
+                        <img class="start" src="../images/constant/Star.png" alt="Rating">
                     </div>
 
                     <div class="buy">
                         <div class="price">
                             <p>$420</p>
                         </div>
-                        <img src="images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
+                        <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
                 </div>
             </div>
