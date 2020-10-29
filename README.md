@@ -1,6 +1,6 @@
 # All Stars my shop
 
-All Stars my shop is a template of a concept store using HTML, CSS, PHP and MySQL only. You can display products and categories, sign-in and sign-up, save users in database, use an admin page to manage your database. Here is an example of a concept store displaying all fashion and timeless shoes ever created since 1920. 
+All Stars my shop is a template of a concept store using HTML, CSS, PHP and MySQL only. You can display products and categories, sign-in and sign-up, save users in database, use an admin page to manage your database. Here is an example of a concept store displaying Chrismas present for people who don't have a lot of money but a great sense of humor 
 
 ## Installation
 
