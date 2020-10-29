@@ -1,2 +1,6 @@
 
 .DS_Store
+
+ERROR_LOG_FILE
+
+PDO_Errors.log
