@@ -1,5 +1,5 @@
 <?php
-include_once('function_index.php')
+include_once('function_index.php');
 ?>
 
 <!DOCTYPE html>
@@ -28,11 +28,10 @@ include_once('function_index.php')
     if($_COOKIE['admin']) {
     ?>
     <style type="text/css">#adminTools {
-        display: flex;
-    <?php } ?></style>
-    
-    
-}
+        display: flex
+    }
+    <?php } ?></style>   
+
     <div class="wrapper_menu">
         <div class="left">
             <nav class="menu navbar navbar-expand-lg navbar-light bg-light">
@@ -58,19 +57,26 @@ include_once('function_index.php')
     </div>
 
     <!-- SEARCH BAR -->
-    
-    <div class="grid-search">
-        <div class="grid-search1">
-                <div class="search">
-                    <input type="text" id="search" class="search_bar" placeholder="Search bar"></input>
-                </div> 
+    <form method="post">
+        <div class="grid-search">
+            <div class="grid-search1">
+                    <div class="search">
+                        <input type="text" id="search" class="search_bar" placeholder="Search bar" name="search_input"></input>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div> 
+            </div>
         </div>
-    </div>
+    </form>
 
     <!-- BODY -->
+<?php
+    if(isset($_POST['search_input'])) {
+        filterItems();
+    }
+?>
     <div class="big-container">
         <div class="grid-container">
-            <div class="grid-item1">
+            <div class="grid-item1" id=<?php echo(includeIdFromDb(16));?>>
             <img src="<?php echo(includeImgFromDb(16));?>" class="image" alt="Coombes">
                 <div class="description">
                     <div class="info-container">
@@ -87,7 +93,7 @@ include_once('function_index.php')
 
                     <div class="buy">
                         <div class="price">
-                            <p class="line1-text">$<?php includePriceFromDb(1);?></p>
+                            <p class="line1-text">$<?php includePriceFromDb(16);?></p>
                         </div>
                         <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
