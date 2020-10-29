@@ -54,15 +54,15 @@ function connectToDb(){
 $bdd = connectToDb();
 
 
-if (isset($_POST['add_user']) && !empty($_POST['username']) && !empty($_POST['password']) && !empty($_POST['email']) && isset($_POST['admin'])){
+if (isset($_POST['add_user']) && isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['admin'])){
     new User($_POST['username'], $_POST['password'], $_POST['email'], $_POST['admin']);    
 }
 
-if (isset($_POST['add_product']) && !empty($_POST['name']) && !empty($_POST['description']) && !empty($_POST['picture']) && !empty($_POST['price']) && !empty($_POST['category_id'])) {
+if (isset($_POST['add_product']) && isset($_POST['name']) && isset($_POST['description']) && isset($_POST['picture']) && isset($_POST['price']) && isset($_POST['category_id'])) {
     new Product($_POST['name'], $_POST['description'], $_POST['picture'], $_POST['price'], $_POST['category_id']);
 }
 
-if (isset($_POST['add_category']) && !empty($_POST['name_category'])) {
+if (isset($_POST['add_category']) && isset($_POST['name_category'])) {
     new Category($_POST['name_category'], $_POST['parent_id']);
 }
 
