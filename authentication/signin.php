@@ -30,17 +30,17 @@ function connect_user($email, $password) {
         $name = $query2->fetch();
 
         if(password_verify($password, $arrayUsers[0]["password"])) {
-            setcookie("username", $name["username"], time() + 3600, '/');
+            setcookie("username", $name["username"], time() + 31556926, '/');
             $sql_admin = "SELECT admin from users where email = '$email'";
             $query_admin = $db->prepare($sql_admin);
             $query_admin->execute();
             $isAdmin = $query_admin->fetch();
             if($isAdmin[0] == "1") {
-                setcookie("admin", true, time() + 3600, '/');
+                setcookie("admin", true, time() + 31556926, '/');
                 header('Location: ../admin/admin.php');
             }
             else {
-                setcookie("admin", false, time() + 3600, '/');
+                setcookie("admin", false, time() + 31556926, '/');
                 header('Location: ../index/index.php');
             }
         }
