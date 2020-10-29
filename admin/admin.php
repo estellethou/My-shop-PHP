@@ -25,10 +25,16 @@ function printTable ($response, $tableColumns, $objectType) {
     {
         echo "<form method=post>";
         echo "<tr>";
+        $i = 0;
         foreach ($tableColumns as $a) {
             $value = $donnees[strtolower($a)];
-            echo "<td><input value='$value' name = " . strtolower($a) ."></td>";
-
+            if ($tableColumns[$i] == "Id" || $tableColumns[$i] == "Created_at") {
+                echo "<td><input value='$value' name = " . strtolower($a) ." readonly></td>";
+            }
+            else {
+                echo "<td><input value='$value' name = " . strtolower($a) ."></td>";
+            }
+            $i++;
         }  
         echo "<td> <input type = 'submit' name ='edit_$objectType' class='add_category btn btn-primary' value='Edit $objectType'/> </td>";
         echo "<td> <input type = 'submit' name ='delete_$objectType' class='add_category btn btn-danger' value='Delete $objectType'/> </td>";
