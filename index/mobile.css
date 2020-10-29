@@ -1,42 +1,74 @@
-/* ----------------------------------------------- RESPONSIVE WEB DESIGN ----------------------------------------*/
-
-/* @media only screen and (max-width: 380px) {
+@media only screen and (max-width: 1024px) {
     .grid-container {
         display: grid;
-        width: 100%;
-        height: auto;
-        grid-template-columns: auto;
-        grid-template-rows: auto auto auto auto;
-        grid-row-gap: 2%;
-        }
-    .grid-item5, .grid-item6, .grid-item7, .grid-item8 {
+        margin-left: auto;
+        margin-right: auto;
+        grid-template-columns: auto auto;
+        grid-template-rows: auto auto;
+        grid-row-gap: 5%;
+        height: 80%;
+        width: 80%;
+    }
+
+    .image{
+        width: 80%;
+        height: 80%;
+    }
+
+    .grid-item7, .grid-item8 {
         display: none;
     } 
-        
-    .img-cart {
-        width: 5%;
-        height: 5%;
-    } 
- 
-    #myUL li a {
-        font-size: 1rem;
+
+    .pagination{
+        display: block;
+        justify-content: center;
+        margin-top: 15rem;
     }
- } */
+
+    .description {
+        width: 60%;
+        line-height: 50%;
+    }
+
+    .navbar-light .navbar-nav .nav-link {
+        display: none;
+    }
+
+}
+
+
+@media only screen and (max-width: 992px) {
+    /* ----------------------------------------------- MENU (nav bar) ----------------------------------------*/
+    .navbar-nav {
+        align-items: center;
+        display: flex;
+        flex-direction: row!important;
+        justify-content: center;
+    }
+
+    /* ----------------------------------------------- SEARCH bar ----------------------------------------*/
+    img.menu_mobile {
+        display: block;
+        height: 24px;
+        margin-left: 10%;
+        width: 24px;
+    }
+
+    .search {
+        display: flex;
+        justify-content: space-between;
+        width: 94%;
+    }
+
+    .search input#search {
+        font-size: 1.2rem;
+        width: 100%;
+        padding-left:0;
+    }
+}
 
 @media only screen and (max-width: 768px){        
     /* ----------------------------------------------- SEARCH bar ----------------------------------------*/
-    .algolia{
-        display: flex;
-        justify-content: flex-end;
-        padding-right: -10%;
-        margin-right: 0;
-        width: 100%;
-    }
- 
-    .disable_best {
-        display: none;
-    }
-
     .grid-search1 {
         grid-column: 1 / span 4;
         display: flex;
@@ -44,26 +76,19 @@
         margin-top: 3%;
     }
 
-    .sub_search input#search {
-        background: none;
+    .search input#search {
         font-size: 1.5rem;
         width: 100%;
         padding-left:0;
     }
-
-    #algolia{
-       margin: 0;
-       width: 40%;
-    }
-
     /* ----------------------------------------------- BODY (main grid) ----------------------------------------*/
     .category {
         margin-top: 5%;
     }
 
     .description {
+        width: 80%;
         line-height: 50%;
-        margin-top: -3%;
     }
     
     .grid-container {
@@ -79,19 +104,11 @@
         display: none;
     } 
 
-    /* ----------------------------------------------- FILTER SECTION (collection, color, category) ----------------------------------------*/
-    #myUL li a {
-        font-size: 1.5rem;
+    .grid-item1, .grid-item2, .grid-item3, .grid-item4{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-
-    .category-ticket, .collection-ticket, .color-ticket, .filter, .slidecontainer, .slidecontainer2 {
-        display: none;
-    }
-
-    .filters-ticket {
-        display: contents;
-    }            
-
     /*----------------------------------------------- FOOTER SECTION CREATE PAGINATION ----------------------------------------*/
     footer {
         margin-top: 12rem;
@@ -108,41 +125,3 @@
     }
 }
 
-@media only screen and (max-width: 992px) {
-    /* ----------------------------------------------- MENU (nav bar) ----------------------------------------*/
-    .navbar-nav {
-        align-items: center;
-        display: flex;
-        flex-direction: row!important;
-        justify-content: center;
-    }
-
-    /* ----------------------------------------------- SEARCH bar ----------------------------------------*/
-    
-    .disable {
-        display:none;
-    }
-
-    img.menu_mobile {
-        display: block;
-        height: 24px;
-        margin-left: 10%;
-        width: 24px;
-    }
-
-    .search {
-        width: 94%;
-    }
-
-    .sub_search input#search {
-        font-size: 1.2rem;
-        width: 100%;
-        padding-left:0;
-    }
-
-    #algolia{
-       margin: 0;
-       width: 40%;
-    }
-
-}

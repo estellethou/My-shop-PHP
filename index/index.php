@@ -47,9 +47,8 @@ include_once('function_index.php');
         <div class="right">
             <nav class="menu navbar navbar-expand-lg navbar-light bg-light">
                 <ul class="navbar-nav mr-auto">
-                    <li class="nav-item"><a href="#" class="nav-link cart"></a></li>
                     <li class="nav-item"><a href="../admin/admin.php" class="nav-link" id="adminTools">ADMIN TOOLS</a></li>
-                    <li class="nav-item"><a href="../authentication/logout.php" class="nav-link">SIGN OUT</a></li>
+                    <li class="nav-item"><a href="../authentication/logout.php" class="sign-out">SIGN OUT</a></li>
                     <img src="../images/constant/burger.png" class="menu_mobile" />
                 </ul>
             </nav>
@@ -62,8 +61,10 @@ include_once('function_index.php');
             <div class="grid-search1">
                     <div class="search">
                         <input type="text" id="search" class="search_bar" placeholder="Search bar" name="search_input"></input>
-                        <button type="submit" class="btn btn-primary">Search</button>
                     </div> 
+                    <div>
+                        <button type="submit" class="btn btn-primary">Search</button>
+                    </div>
             </div>
         </div>
     </form>
