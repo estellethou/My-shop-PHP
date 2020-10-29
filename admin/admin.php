@@ -75,7 +75,7 @@ if (isset($_POST['add_product']) && isset($_POST['name']) && isset($_POST['descr
     <style type="text/css">#uploadSuccess {
         display: block;
     }</style>
-<?php
+    <?php
 }
 
 if (isset($_POST['add_category']) && isset($_POST['name_category'])) {

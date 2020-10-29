@@ -1,4 +1,7 @@
 <?php
+
+
+
 function connectToDb(){
     try {
         $bdd = new PDO("mysql:host=127.0.0.1;dbname=my_shop", 'root', 'root');
@@ -59,6 +62,7 @@ function includeImgFromDb($id){
             <nav class="menu navbar navbar-expand-lg navbar-light bg-light">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a href="#" class="nav-link cart"></a></li>
+                    <li class="nav-item" id="adminTools"><a href="../admin/admin.php" class="nav-link">ADMIN TOOLS</a></li>
                     <li class="nav-item"><a href="../authentication/logout.php" class="nav-link">SIGN OUT</a></li>
                     <img src="../images/constant/burger.png" class="menu_mobile" />
                 </ul>

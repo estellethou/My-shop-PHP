@@ -58,7 +58,7 @@ nav li {
 .navbar-light .navbar-nav .nav-link {
     background-color: white;
     color: black!important;
-    font-size: 0.7rem;
+    font-size: 1rem;
     font-weight: bold;
     opacity: 1;
 }
@@ -67,6 +67,11 @@ nav.menu {
     background-color: white!important;
     height: 80px;
     padding: 0;
+}
+
+/* hide admin tools default */
+#adminTools {
+    display:none;
 }
 
 /* ----------------------------------------------- SEARCH bar ----------------------------------------*/
@@ -348,3 +353,4 @@ strong{
 footer {
     margin-top: 10%;
 }
+
