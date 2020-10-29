@@ -53,15 +53,19 @@ function editUserIntoDb(){
         $hash = password_hash($_POST['password'], PASSWORD_DEFAULT);
         if(filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)){
             $bdd = connectToDb();
-            $response = $bdd->prepare("SELECT email FROM users WHERE email='" . $_POST['email'] . "';"); 
-            $response->execute();
-            if ($response->num_rows == 0) {
-                $bdd = connectToDb();
-                $response = $bdd->prepare("UPDATE users 
+            $response = $bdd->prepare("UPDATE users 
                 SET username='" . $_POST['username'] . "', 
                 password='" . $hash . "',
-                email='" . $_POST['email'] . "',
                 admin='" . $_POST['admin'] . "' WHERE id='" . $_POST['id'] . "';");
+            $response->execute();
+            echo "<meta http-equiv='refresh' content='0'>";
+            $response = $bdd->prepare("SELECT email FROM users WHERE email='" . $_POST['email'] . "';"); 
+            $response->execute();
+            $donnee = $response->fetch();
+            if ($donnee['email'] == null) {
+                $response = $bdd->prepare("UPDATE users 
+                    SET email='" . $_POST['email'] . "'
+                    WHERE id='" . $_POST['id'] . "';");
                 $response->execute();
                 $response = $bdd->prepare("SELECT * FROM users");
                 $response->execute();
