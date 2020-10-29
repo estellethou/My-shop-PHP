@@ -4,7 +4,7 @@ include_once('product.php');
 include_once('user.php');
 
 if (!$_COOKIE['admin']) {
-    header("Location: index.php");
+    header("Location: ../index/index.php");
    }
 
 interface Printing{
@@ -77,6 +77,7 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category'])) {
     <meta name="description"
         content="All stars is a concept store of furnitures for your appartement. You will find amazing design furnitures for your living room, your kitchen, your batchroom and your bedroom." />
     <link href="style_admin.css" rel="stylesheet" />
+    <link href="all.css" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
         integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap" rel="stylesheet">
@@ -85,9 +86,9 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category'])) {
 
 <body>
 <div class= "navbar" id="header">
-    <a class="btn btn-primary my-2 my-lg-0" href="index.php"><i class="far fa-arrow-left"></i> Back to site</a>
+    <a class="btn btn-primary my-2 my-lg-0" href="..index/index.php"><i class="far fa-arrow-left"></i> Back to site</a>
     <h1 class="mx-auto"> Administration tools </h1>
-    <a class="btn btn-primary my-2 my-lr-0" href="logout.php">Logout</a>
+    <a class="btn btn-primary my-2 my-lr-0" href="../authentication/logout.php">Logout</a>
 </div>
 <ul class="nav nav-tabs">
     <li class="nav-item"><a class="nav-link" href="#tab1">Users</a></li>
@@ -256,6 +257,7 @@ if (isset($_POST['delete_category'])) {
 if (isset($_POST['edit_category'])){
     editCategoryIntoDb();
 }
+
 ?>
 </section>
 </body>

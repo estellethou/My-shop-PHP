@@ -33,7 +33,7 @@
             <nav class="menu navbar navbar-expand-lg navbar-light bg-light">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a href="#" class="nav-link cart"></a></li>
-                    <li class="nav-item disable"><a href="#" class="nav-link">LOGIN</a></li>
+                    <li class="nav-item"><a href="../authentication/logout.php" class="nav-link">LOGOUT</a></li>
                     <img src="images/constant/burger.png" class="menu_mobile" />
                 </ul>
             </nav>

@@ -3,7 +3,7 @@ if ($_COOKIE['admin']) {
     header("Location: ../admin/admin.php");
    }
 else if(isset($_COOKIE['username'])){
-        header("Location: index.php");
+    header("Location: ../index/index.php");
     }
 
 const ERROR_LOG_FILE = 'PDO_Errors.log';
@@ -30,17 +30,17 @@ function connect_user($email, $password) {
         $name = $query2->fetch();
 
         if(password_verify($password, $arrayUsers[0]["password"])) {
-            setcookie("username", $name["username"]);
+            setcookie("username", $name["username"], time() + 3600, '/');
             $sql_admin = "SELECT admin from users where email = '$email'";
             $query_admin = $db->prepare($sql_admin);
             $query_admin->execute();
             $isAdmin = $query_admin->fetch();
             if($isAdmin[0] == "1") {
-                setcookie("admin", true);
+                setcookie("admin", true, time() + 3600, '/');
                 header('Location: ../admin/admin.php');
             }
             else {
-                setcookie("admin", false);
+                setcookie("admin", false, time() + 3600, '/');
                 header('Location: ../index/index.php');
             }
         }
