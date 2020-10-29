@@ -20,6 +20,33 @@ function includeImgFromDb($id){
     $picture_path = "../images/". $donnees['picture'];
     return($picture_path);
 }
+
+function includeNameFromDb($id){
+    $bdd= connectToDb();
+    $response = $bdd->prepare("SELECT name FROM products WHERE id ='" . $id . "';");
+    $response->execute();
+    $donnees = $response->fetch();
+    $productName = $donnees['name'];
+    return($productName);
+}
+
+function includeDescriptionFromDb($id){
+    $bdd= connectToDb();
+    $response = $bdd->prepare("SELECT description FROM products WHERE id ='" . $id . "';");
+    $response->execute();
+    $donnees = $response->fetch();
+    $productDesc = $donnees['description'];
+    print($donnees['description']);
+}
+
+function includePriceFromDb($id){
+    $bdd= connectToDb();
+    $response = $bdd->prepare("SELECT price FROM products WHERE id ='" . $id . "';");
+    $response->execute();
+    $donnees = $response->fetch();
+    print($donnees['price']);
+}
+
 ?>
 
 
@@ -43,6 +70,17 @@ function includeImgFromDb($id){
 
 <body>
     <!-- MENU -->
+
+    <!-- show admin tools if admin -->
+    <?php
+    if($_COOKIE['admin']) {
+    ?>
+    <style type="text/css">#adminTools {
+        display: flex;
+    <?php } ?></style>
+    
+    
+}
     <div class="wrapper_menu">
         <div class="left">
             <nav class="menu navbar navbar-expand-lg navbar-light bg-light">
@@ -59,7 +97,7 @@ function includeImgFromDb($id){
             <nav class="menu navbar navbar-expand-lg navbar-light bg-light">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item"><a href="#" class="nav-link cart"></a></li>
-                    <li class="nav-item" id="adminTools"><a href="../admin/admin.php" class="nav-link">ADMIN TOOLS</a></li>
+                    <li class="nav-item"><a href="../admin/admin.php" class="nav-link" id="adminTools">ADMIN TOOLS</a></li>
                     <li class="nav-item"><a href="../authentication/logout.php" class="nav-link">SIGN OUT</a></li>
                     <img src="../images/constant/burger.png" class="menu_mobile" />
                 </ul>
@@ -81,12 +119,12 @@ function includeImgFromDb($id){
     <div class="big-container">
         <div class="grid-container">
             <div class="grid-item1">
-            <img src="<?php echo(includeImgFromDb(2));?>" class="image" alt="Coombes">
+            <img src="<?php echo(includeImgFromDb(1));?>" class="image" alt="Coombes">
                 <div class="description">
                     <div class="info-container">
                         <div class="info">
-                            <p class="line1-text" ><strong>Coombes</strong></p>
-                            <p class="info-text">LOUNGE</p>
+                            <p class="line1-text" ><strong><?php echo(includeNameFromDb(1));?></strong></p>
+                            <p class="info-text"><?php includeDescriptionFromDb(1);?></p>
                         </div>
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
@@ -97,7 +135,7 @@ function includeImgFromDb($id){
 
                     <div class="buy">
                         <div class="price">
-                            <p class="line1-text">$2,600</p>
+                            <p class="line1-text">$<?php includePriceFromDb(1);?></p>
                         </div>
                         <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
@@ -105,13 +143,13 @@ function includeImgFromDb($id){
             </div>
 
             <div class="grid-item2">
-                <img src="../images/furniture_p1/test1.jpg" class="image" alt="Coombes">
+                <img src="<?php echo(includeImgFromDb(39));?>" class="image" alt="Coombes">
 
                 <div class="description">
                     <div class="info-container">
                         <div class="info">
-                            <p class="line1-text" ><strong>Coombes</strong></p>
-                            <p class="info-text">LOUNGE</p>
+                            <p class="line1-text" ><strong><?php echo(includeNameFromDb(2));?></strong></p>
+                            <p class="info-text"><?php includeDescriptionFromDb(2);?></p>
                         </div>
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
@@ -122,7 +160,7 @@ function includeImgFromDb($id){
 
                     <div class="buy">
                         <div class="price">
-                            <p class="line1-text">$2,600</p>
+                            <p class="line1-text">$<?php includePriceFromDb(39);?></p>
                         </div>
                         <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
@@ -130,13 +168,13 @@ function includeImgFromDb($id){
             </div>
 
             <div class="grid-item3">
-                <img src="../images/furniture_p1/test2.jpg" class="image" alt="Keeves Set">
+                <img src="<?php echo(includeImgFromDb(3));?>" class="image" alt="Keeves Set">
 
                 <div class="description">
                     <div class="info-container">
                         <div class="info">
-                            <p class="line1-text" ><strong>Keeve Set</strong></p>
-                            <p class="info-text">TABLE & CHAIRS</p>
+                            <p class="line1-text" ><strong><?php echo(includeNameFromDb(3));?></strong></p>
+                            <p class="info-text"><?php includeDescriptionFromDb(3);?></p>
                         </div>
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
@@ -147,7 +185,7 @@ function includeImgFromDb($id){
 
                     <div class="buy">
                         <div class="price">
-                            <p class="line1-text">$590</p>
+                            <p class="line1-text">$<?php includePriceFromDb(3);?></p>
                         </div>
                         <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
@@ -155,13 +193,13 @@ function includeImgFromDb($id){
             </div>
 
             <div class="grid-item4">
-                <img src="../images/furniture_p1/test3.jpg" class="image" alt="Nillè">
+                <img src="<?php echo(includeImgFromDb(4));?>" class="image" alt="Nillè">
 
                 <div class="description">
                     <div class="info-container">
                         <div class="info">
-                            <p class="line1-text"><strong>Nillè</strong></p>
-                            <p class="info-text">ARMCHAIR</p>
+                            <p class="line1-text"><strong><?php echo(includeNameFromDb(4));?></strong></p>
+                            <p class="info-text"><?php includeDescriptionFromDb(4);?></p>
                         </div>
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
@@ -172,7 +210,7 @@ function includeImgFromDb($id){
 
                     <div class="buy">
                         <div class="price">
-                            <p class="line1-text">$950</p>
+                            <p class="line1-text">$<?php includePriceFromDb(4);?></p>
                         </div>
                         <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
@@ -180,13 +218,13 @@ function includeImgFromDb($id){
             </div>
 
             <div class="grid-item5">
-                <img src="../images/furniture_p1/test4.jpg" class="image" alt="Blanko">
+                <img src="<?php echo(includeImgFromDb(6));?>" class="image" alt="Blanko">
 
                 <div class="description">
                     <div class="info-container">
                         <div class="info">
-                            <p class="line1-text"><strong>Blanko</strong></p>
-                            <p class="info-text">SIDE TABLE</p>
+                            <p class="line1-text"><strong><?php echo(includeNameFromDb(6));?></strong></p>
+                            <p class="info-text"><?php includeDescriptionFromDb(6);?></p>
                         </div>
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
@@ -197,7 +235,7 @@ function includeImgFromDb($id){
 
                     <div class="buy">
                         <div class="price">
-                            <p>$90</p>
+                            <p>$<?php includePriceFromDb(6);?></p>
                         </div>
                         <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
@@ -205,13 +243,13 @@ function includeImgFromDb($id){
             </div>
 
             <div class="grid-item6">
-                <img src="../images/furniture_p1/test5.jpg" class="image" alt="Momo">
+                <img src="<?php echo(includeImgFromDb(2));?>" class="image" alt="Momo">
 
                 <div class="description">
                     <div class="info-container">
                         <div class="info">
-                            <p><strong>Momo</strong></p>
-                            <p class="info-text">SHELVES</p>
+                            <p><strong><?php echo(includeNameFromDb(39));?></strong></p>
+                            <p class="info-text">S<?php includeDescriptionFromDb(39);?></p>
                         </div>
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
@@ -222,7 +260,7 @@ function includeImgFromDb($id){
 
                     <div class="buy">
                         <div class="price">
-                            <p>$890</p>
+                            <p>$<?php includePriceFromDb(2);?></p>
                         </div>
                         <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
@@ -230,13 +268,13 @@ function includeImgFromDb($id){
             </div>
 
             <div class="grid-item7">
-                <img src="../images/furniture_p1/test6.jpg" class="image" alt="Penemillè">
+                <img src="<?php echo(includeImgFromDb(42));?>" class="image" alt="Penemillè">
 
                 <div class="description">
                     <div class="info-container">
                         <div class="info">
-                            <p><strong>Penemillè</strong></p>
-                            <p class="info-text">CHAIR</p>
+                            <p><strong><?php echo(includeNameFromDb(42));?></strong></p>
+                            <p class="info-text"><?php includeDescriptionFromDb(42);?></p>
                         </div>
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
@@ -247,7 +285,7 @@ function includeImgFromDb($id){
 
                     <div class="buy">
                         <div class="price">
-                            <p>$120</p>
+                            <p>$<?php includePriceFromDb(42);?></p>
                         </div>
                         <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
@@ -255,13 +293,13 @@ function includeImgFromDb($id){
             </div>
 
             <div class="grid-item8">
-                <img src="../images/furniture_p1/test7.jpg" class="image" alt="Kappu">
+                <img src="<?php echo(includeImgFromDb(43));?>" class="image" alt="Kappu">
 
                 <div class="description">
                     <div class="info-container">
                         <div class="info">
-                            <p><strong>Kappu</strong></p>
-                            <p class="info-text">SHELVES</p>
+                            <p><strong><?php echo(includeNameFromDb(43));?></strong></p>
+                            <p class="info-text"><?php includeDescriptionFromDb(43);?></p>
                         </div>
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
                         <img class="start" src="../images/constant/Star - On.png" alt="Rating">
@@ -272,7 +310,7 @@ function includeImgFromDb($id){
 
                     <div class="buy">
                         <div class="price">
-                            <p>$420</p>
+                            <p>$<?php includePriceFromDb(43);?></p>
                         </div>
                         <img src="../images/constant/Cart Button.png" class="img-cart" alt="Add item to cart">
                     </div>
