@@ -1,4 +1,12 @@
 <?php
+if ($_COOKIE['admin']) {
+    header("Location: admin.php");
+   }
+// else if(isset($_COOKIE['username'])){
+//         header("Location: index.php");
+//     }
+
+
 const ERROR_LOG_FILE = 'PDO_Errors.log';
 const DB_HOST = "127.0.0.1";
 const DB_USERNAME = "root";
