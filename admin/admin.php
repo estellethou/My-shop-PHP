@@ -86,7 +86,7 @@ if (isset($_POST['add_category']) && isset($_POST['name_category'])) {
 
 <body>
 <div class= "navbar" id="header">
-    <a class="btn btn-primary my-2 my-lg-0" href="..index/index.php"><i class="far fa-arrow-left"></i> Back to site</a>
+    <a class="btn btn-primary my-2 my-lg-0" href="../index/index.php"><i class="far fa-arrow-left"></i> Back to site</a>
     <h1 class="mx-auto"> Administration tools </h1>
     <a class="btn btn-primary my-2 my-lr-0" href="../authentication/logout.php">Logout</a>
 </div>
