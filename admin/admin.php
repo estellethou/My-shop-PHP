@@ -84,7 +84,11 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category'])) {
 </head>
 
 <body>
-<h1> Administration tools </h1>
+<div class= "navbar" id="header">
+    <a class="btn btn-primary my-2 my-lg-0" href="index.php"><i class="far fa-arrow-left"></i> Back to site</a>
+    <h1 class="mx-auto"> Administration tools </h1>
+    <a class="btn btn-primary my-2 my-lr-0" href="logout.php">Logout</a>
+</div>
 <ul class="nav nav-tabs">
     <li class="nav-item"><a class="nav-link" href="#tab1">Users</a></li>
     <li class="nav-item"><a class="nav-link" href="#tab2">Products</a></li>
