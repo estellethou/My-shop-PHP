@@ -23,13 +23,16 @@ function printTable ($response, $tableColumns, $objectType) {
     echo "<tbody>";
     while($donnees = $response->fetch())
     {
-        echo "<form method=post>";
+        echo "<form method=post enctype=multipart/form-data>";
         echo "<tr>";
         $i = 0;
         foreach ($tableColumns as $a) {
             $value = $donnees[strtolower($a)];
             if ($tableColumns[$i] == "Id" || $tableColumns[$i] == "Created_at") {
                 echo "<td><input value='$value' name = " . strtolower($a) ." readonly></td>";
+            }
+            else if ($tableColumns[$i] == "Picture"){
+                echo "<td><input value='$value' name = " . strtolower($a) ." ><input type='file' name =new_picture ></td>";
             }
             else {
                 echo "<td><input value='$value' name = " . strtolower($a) ."></td>";
@@ -221,12 +224,14 @@ else {
     $response->execute();
     printTable($response, $arrayProducts, "product");
 }
+
 if (isset($_POST['delete_product'])) {
     deleteProductIntoDb();
 }
 
 if (isset($_POST['edit_product'])){
     editProductIntoDb();
+    upload_image($_FILES['new_picture']);
 }
 ?>
 </section>
