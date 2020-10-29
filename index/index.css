@@ -1,0 +1,354 @@
+@font-face {
+	font-family: 'roboto';
+	src: url('Roboto-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+		 url('Roboto-Regular-webfont.woff') format('woff'),
+         url('Roboto-Regular-webfont.ttf') format('truetype'),
+         url('Roboto-Regular-webfont.svg#RobotoRegular') format('svg');
+}
+
+@font-face {
+	font-family: 'avenir';
+	src: url('../fonts/Avenir.eot?#iefix') format('embedded-opentype'), 
+		 url('../fonts/Avenir.woff') format('woff'),
+		 url('../fonts/Avenir.ttf')  format('truetype'),
+		 url('../fonts/Avenir.svg#Avenir') format('svg');
+}
+
+* { /* or body */
+	font-family: 'avenir', 'roboto', arial, "arial black", verdana, sans-serif;
+}
+
+/* ----------------------------------------------- MENU (nav bar) ----------------------------------------*/
+a.cart {
+    background: url('images/constant/Cart Button.png');
+    background-position: center;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-size: 25px 25px;
+    display: block;
+    width: 40px;
+}
+
+div.right {
+    grid-column-start: menu-right;
+    justify-self: right;
+}
+
+div.wrapper_menu {
+    display: grid;
+    grid-template-columns: [menu-left] 50% auto [menu-right] 15%;
+    margin: 0 3% 0 3%;
+    width: 94%;
+}
+
+img.logo {
+    height: 80px;
+    margin: 0 20px 0 0;
+    width: 80px;
+}
+
+img.menu_mobile {
+    display: none;
+}
+
+nav li {
+    margin: auto 20px auto 20px;
+}
+
+.navbar-light .navbar-nav .nav-link {
+    background-color: white;
+    color: black!important;
+    font-size: 0.7rem;
+    font-weight: bold;
+    opacity: 1;
+}
+
+nav.menu {
+    background-color: white!important;
+    height: 80px;
+    padding: 0;
+}
+
+/* ----------------------------------------------- SEARCH bar ----------------------------------------*/
+.dropdown li a {
+    background-color: #ffffff;
+    border-bottom : 0.123rem solid #ddd; 
+    color: black; 
+    display: flex; 
+    font-size: 0.9rem;
+    justify-content: space-between;
+    text-decoration: none; /* Remove default text underline */
+}
+
+.dropdown li {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.loupe {
+    width: auto;
+    margin-right: 7%;
+    margin-left: 3%;
+}
+
+img.loupe  {
+    width: 1rem;
+    height: 1rem ;
+}
+
+.disable_algolia {
+    display: none; /*only need the img for background*/
+}
+
+.grid-search {
+    display: grid;
+    grid-column-gap: 3%;
+    grid-template-columns: 22% 22% 22% 22%;
+	height: auto;
+    margin: 0 3% 0 3%;
+    width: 94%;
+}
+
+.grid-search1 {
+    grid-column: 1 / span 3;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3%;
+}
+
+.grid-search2 {
+    grid-column: 4;
+} 
+
+.sub_search{
+    width: 90%;
+}
+
+
+.sub_search input#search {
+    background: url("images/constant/Algolia_logo.png");
+    background-position: bottom right;
+    background-repeat: no-repeat;
+    background-size: 25%;
+    border: none;
+    border-bottom: 2px solid black;
+    font-size: 1.4rem;
+    font-weight: bold;
+    padding-bottom: 0%;
+    width: 100%;
+    padding-left:20px;
+
+}
+
+div.dropdown_search {
+    width: 100%;
+    margin-top: 14%;
+}
+
+input#search:focus {
+    outline: none;
+}
+
+ul.dropdown{
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* ----------------------------------------------- BODY (main grid) ----------------------------------------*/
+.big-container {
+	margin: 3%;
+}
+
+.description {
+    display: flex;
+    justify-content: space-between;
+    line-height: 40%;
+    padding-left: 6%;
+    padding-right: 6%;
+    padding-top: 5%;
+    /* margin-top: 8%; */
+}
+
+.grid-container {
+	display: grid;
+	grid-template-columns: 22% 22% 22% 22%;
+	grid-template-rows: 40% 40%;
+	grid-column-gap: 3%;
+    grid-row-gap: 20%;
+    height: auto;
+    width: 100%;
+}
+
+.info {
+	display: flex;
+    flex-direction: column;
+}
+
+.info-text {
+    color: rgb(156, 156, 156);
+    font-size: 0.65rem;
+}
+
+.image {
+    height: 100%;
+    width: 100%;
+}
+
+/* .img-cart {
+	width: 6.5%;
+    height: 6.5%;
+} */
+
+.line1-text {
+    font-size: 0.9rem;
+}
+
+p {
+	font-size: 0.75rem;
+}
+
+strong{
+	font-weight: bold;
+}
+
+   /* ----------------------------------------------- FILTER SECTION (collection, color, category) ----------------------------------------*/
+#myUL li a {
+    background-color: #ffffff;
+    border-bottom : 0.123rem solid #ddd; 
+    color: black; 
+    display: flex; 
+    font-size: 0.75rem;
+    justify-content: space-between;
+    padding-bottom: 5%; 
+    padding-top: 3%;
+    text-decoration: none; /* Remove default text underline */
+    width: 100%;
+}
+
+.filter {
+    color: rgb(156, 156, 156);
+    font-size: 0.60rem;
+    margin-top: 0;
+    margin-bottom: 2%;
+}
+
+.filter_section {
+    display: inline-block;
+    margin-left: 3%;
+    margin-top: 0;
+    padding-top: 0;
+}
+
+.filters-ticket {
+    display:none;
+}
+
+.img_arrow {
+    width: 5%;
+}
+
+.img_arrow2 {
+    width: 13%;
+}
+
+#myUL {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+   /*----------------------------------------------- BELOW FILTER SECTION (slider range PRICE) ----------------------------------------*/
+    
+.label_price {
+    font-size: 0.75rem;
+}
+
+.max_price {
+    display: flex;
+    font-size: 0.65rem;
+    justify-content: flex-end;
+}
+
+.min_price {
+    display: flex;
+    font-size: 0.65rem;
+    justify-content: flex-start;
+}
+
+.slider {
+    background: #d3d3d3;
+    border-radius: 5px;
+    height: 0.123rem; 
+    outline: none;
+    opacity: 1;
+    -webkit-appearance: none; /* Override default CSS styles */
+    width: 100%;
+    -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+    transition: opacity .2s;
+}
+
+.slider:hover {
+    opacity: 1;
+}
+    
+    /* The slider handle (use -webkit- (Chrome, Opera, Safari, Edge) and -moz- (Firefox) to override default look) */
+    
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    background: url('images/constant/circle.png') no-repeat center white;
+    cursor: pointer; /* Cursor on hover */
+    height: 1rem;
+    -webkit-appearance: none;
+    width: 1rem;
+}
+
+.slider::-moz-range-thumb {
+    background: url('images/constant/circle.png') no-repeat center white;
+    cursor: pointer;
+    border: 0;
+    height: 1rem;
+    width: 1rem;
+}
+
+.slidecontainer {
+    height: 100%;
+    margin-top: 4%;
+    width: 100%;
+}
+
+.slidecontainer2 {
+    height: 100%;
+    margin-top: -1rem;
+    width: 100%;
+}
+   /*----------------------------------------------- FOOTER SECTION CREATE PAGINATION ----------------------------------------*/
+.pagination a {
+    color: black;
+    float: left;
+    font-size: 0.8rem;
+    margin-right: 1.5%;
+    padding: 1rem 1.3rem;
+    text-decoration: none;
+    transition: background-color .3s;
+}
+
+.pagination a.active {
+    background-color: black;
+    color: white;
+}
+
+.pagination a:hover:not(.active) {
+    background-color: #ddd;
+} /* select element which is NOT .active */
+
+.pagination {
+    display: flex;
+    font-weight: bold;
+    margin: 5% 3% 5% 3%;
+    width: 100%;
+}
+
+footer {
+    margin-top: 10%;
+}

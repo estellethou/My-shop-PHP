@@ -1,12 +1,4 @@
 <?php
-if ($_COOKIE['admin']) {
-    header("Location: admin.php");
-   }
-// else if(isset($_COOKIE['username'])){
-//         header("Location: index.php");
-//     }
-
-
 const ERROR_LOG_FILE = 'PDO_Errors.log';
 const DB_HOST = "127.0.0.1";
 const DB_USERNAME = "root";
@@ -38,11 +30,11 @@ function connect_user($email, $password) {
             $isAdmin = $query_admin->fetch();
             if($isAdmin[0] == "1") {
                 setcookie("admin", true);
-                header('Location: admin.php');
+                header('Location: ../admin/admin.php');
             }
             else {
                 setcookie("admin", false);
-                header('Location: index.php');
+                header('Location: ../index/index.php');
             }
         }
         else if (!empty($_POST["email"])){
