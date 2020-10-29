@@ -41,15 +41,17 @@ function deleteUserIntoDb(){
 }
 
 function editUserIntoDb(){
-    $bdd = connectToDb();
-    $response = $bdd->prepare("UPDATE users 
-    SET username='" . $_POST['username'] . "', 
-    password='" . $_POST['password'] . "',
-    email='" . $_POST['email'] . "',
-    admin='" . $_POST['admin'] . "' WHERE id='" . $_POST['id'] . "';");
-    $response->execute();
-    $response = $bdd->prepare("SELECT * FROM users");
-    $response->execute();
-    echo "<meta http-equiv='refresh' content='0'>";
+    if (isset($_POST['username']) && isset($_POST['password']) && isset($_POST['email']) && isset($_POST['admin'])){
+        $bdd = connectToDb();
+        $response = $bdd->prepare("UPDATE users 
+        SET username='" . $_POST['username'] . "', 
+        password='" . $_POST['password'] . "',
+        email='" . $_POST['email'] . "',
+        admin='" . $_POST['admin'] . "' WHERE id='" . $_POST['id'] . "';");
+        $response->execute();
+        $response = $bdd->prepare("SELECT * FROM users");
+        $response->execute();
+        echo "<meta http-equiv='refresh' content='0'>";
+    }
 }
 ?>

@@ -31,13 +31,15 @@ function deleteCategoryIntoDb(){
 }
 
 function editCategoryIntoDb(){
-    $bdd = connectToDb();
-    $response = $bdd->prepare("UPDATE categories 
-    SET name='" . $_POST['name'] . "', 
-    parent_id='" . $_POST['parent_id'] . "' WHERE id='" . $_POST['id'] . "';");
-    $response->execute();
-    $response = $bdd->prepare("SELECT * FROM categories");
-    $response->execute();
-    echo "<meta http-equiv='refresh' content='0'>";
+    if (isset($_POST['name_category'])) {
+        $bdd = connectToDb();
+        $response = $bdd->prepare("UPDATE categories 
+        SET name='" . $_POST['name'] . "', 
+        parent_id='" . $_POST['parent_id'] . "' WHERE id='" . $_POST['id'] . "';");
+        $response->execute();
+        $response = $bdd->prepare("SELECT * FROM categories");
+        $response->execute();
+        echo "<meta http-equiv='refresh' content='0'>";
+    }
 }
 ?>

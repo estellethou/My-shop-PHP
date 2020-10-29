@@ -11,8 +11,6 @@
     $password = $_POST['password']; 
     $hash = password_hash($password, PASSWORD_BCRYPT);
 
-
-
     function add_user ($email, $username, $hash) {
         try {
             $db = connect_db(DB_HOST, DB_USERNAME, DB_PASSWORD, DB_NAME);
@@ -35,7 +33,6 @@
             error_log("Error MySQL, user not added, more infos in \n" . ERROR_LOG_FILE, 3, ERROR_LOG_FILE);
         }
     }
-    
 
     function connect_db($host, $usr, $pwd, $db) {
         try {
