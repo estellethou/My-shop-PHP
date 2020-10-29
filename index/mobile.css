@@ -1,0 +1,148 @@
+/* ----------------------------------------------- RESPONSIVE WEB DESIGN ----------------------------------------*/
+
+/* @media only screen and (max-width: 380px) {
+    .grid-container {
+        display: grid;
+        width: 100%;
+        height: auto;
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto auto;
+        grid-row-gap: 2%;
+        }
+    .grid-item5, .grid-item6, .grid-item7, .grid-item8 {
+        display: none;
+    } 
+        
+    .img-cart {
+        width: 5%;
+        height: 5%;
+    } 
+ 
+    #myUL li a {
+        font-size: 1rem;
+    }
+ } */
+
+@media only screen and (max-width: 768px){        
+    /* ----------------------------------------------- SEARCH bar ----------------------------------------*/
+    .algolia{
+        display: flex;
+        justify-content: flex-end;
+        padding-right: -10%;
+        margin-right: 0;
+        width: 100%;
+    }
+ 
+    .disable_best {
+        display: none;
+    }
+
+    .grid-search1 {
+        grid-column: 1 / span 4;
+        display: flex;
+        justify-content: space-between;
+        margin-top: 3%;
+    }
+
+    .sub_search input#search {
+        background: none;
+        font-size: 1.5rem;
+        width: 100%;
+        padding-left:0;
+    }
+
+    #algolia{
+       margin: 0;
+       width: 40%;
+    }
+
+    /* ----------------------------------------------- BODY (main grid) ----------------------------------------*/
+    .category {
+        margin-top: 5%;
+    }
+
+    .description {
+        line-height: 50%;
+        margin-top: -3%;
+    }
+    
+    .grid-container {
+        display: grid;
+        grid-template-columns: auto;
+        grid-template-rows: auto auto auto auto;
+        grid-row-gap: 2%;
+        height: auto;
+        width: 100%;
+    }
+
+    .grid-item5, .grid-item6, .grid-item7, .grid-item8 {
+        display: none;
+    } 
+
+    /* ----------------------------------------------- FILTER SECTION (collection, color, category) ----------------------------------------*/
+    #myUL li a {
+        font-size: 1.5rem;
+    }
+
+    .category-ticket, .collection-ticket, .color-ticket, .filter, .slidecontainer, .slidecontainer2 {
+        display: none;
+    }
+
+    .filters-ticket {
+        display: contents;
+    }            
+
+    /*----------------------------------------------- FOOTER SECTION CREATE PAGINATION ----------------------------------------*/
+    footer {
+        margin-top: 12rem;
+        width: 100%;
+    }
+
+    .p5, .p6, .p7, .p8, .p9, .p10 {
+        display: none;
+        }
+
+    .pagination {
+    display: flex;
+    justify-content: space-around;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    /* ----------------------------------------------- MENU (nav bar) ----------------------------------------*/
+    .navbar-nav {
+        align-items: center;
+        display: flex;
+        flex-direction: row!important;
+        justify-content: center;
+    }
+
+    /* ----------------------------------------------- SEARCH bar ----------------------------------------*/
+    
+    .disable {
+        display:none;
+    }
+
+    img.menu_mobile {
+        display: block;
+        height: 24px;
+        margin-left: 10%;
+        width: 24px;
+    }
+
+    .search {
+        width: 94%;
+    }
+
+    .sub_search input#search {
+        font-size: 1.2rem;
+        width: 100%;
+        padding-left:0;
+    }
+
+    #algolia{
+       margin: 0;
+       width: 40%;
+    }
+
+}
