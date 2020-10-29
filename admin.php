@@ -230,7 +230,6 @@ if (isset($_POST['add_category']) && !empty($_POST['name_category'])) {
 </head>
 
 <body>
-<h1> Administration tools </h1>
 <div class= "navbar" id="header">
     <a class="btn btn-primary my-2 my-lg-0" href="index.php"><i class="far fa-arrow-left"></i> Back to site</a>
     <h1 class="mx-auto"> Administration tools </h1>
